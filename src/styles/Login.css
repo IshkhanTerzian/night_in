@@ -1,0 +1,56 @@
+.top-banner {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.top-banner h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+.login-container {
+  height: 100vh;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-form label {
+  text-align: center;
+  display: block;
+  font-weight: bold;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.login-form button[type="submit"] {
+  width: 100%;
+}
+
+.bottom-banner {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.centered-text-input {
+  text-align: center;
+}
