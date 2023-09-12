@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -10,6 +12,7 @@ const Login = () => {
     e.preventDefault();
     console.log(`USERNAME: ${username}`);
     console.log(`PASSWORD: ${password}`);
+    navigate("/landingpage");
   };
 
   const navigate = useNavigate();
@@ -67,10 +70,7 @@ const Login = () => {
           </Col>
         </Row>
       </Container>
-
-      <div className="bottom-banner">
-        <h1>copyright @ Ishkhan Terzian</h1>
-      </div>
+      <Footer />
     </>
   );
 };

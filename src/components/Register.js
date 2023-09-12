@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import Footer from "./Footer";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -18,14 +19,12 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    // Reset previous errors
     setErrors({
       username: "",
       email: "",
       password: "",
     });
 
-    // Error handling for username length
     if (formData.username.length < 5 || formData.username.length > 10) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -34,7 +33,6 @@ const Register = () => {
       return;
     }
 
-    // Error handling for email host
     const emailHost = formData.email.split("@")[1];
     if (!emailHost || !emailHost.includes(".")) {
       setErrors((prevErrors) => ({
@@ -44,7 +42,6 @@ const Register = () => {
       return;
     }
 
-    // Error handling for password matching confirmPassword
     if (formData.password !== formData.confirmPassword) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -135,10 +132,7 @@ const Register = () => {
           </Col>
         </Row>
       </Container>
-
-      <div className="bottom-banner">
-        <h1>copyright @ Ishkhan Terzian</h1>
-      </div>
+      <Footer />
     </>
   );
 };
