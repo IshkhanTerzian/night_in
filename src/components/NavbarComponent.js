@@ -4,7 +4,7 @@ import { Navbar, Nav } from "react-bootstrap";
 function NavbarComponent() {
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="#">Night-In</Navbar.Brand>
+      <Navbar.Brand href="/landingpage">Night-In</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">

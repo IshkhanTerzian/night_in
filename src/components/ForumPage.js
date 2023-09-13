@@ -1,8 +1,14 @@
 import React from 'react'
+import NavbarComponent from "./NavbarComponent";
+
 
 function ForumPage() {
   return (
-    <div>ForumPage</div>
+    <>
+      <NavbarComponent />
+      <div>ForumPage</div>
+    
+    </>
   )
 }
 
