@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import LandingPage from "./components/LandingPage";
-import RecipePage from "./components/RecipePage";
-import ForumPage from "./components/ForumPage";
+import RecipePage from "./components/Recipes";
+import ForumPage from "./components/Forum";
 import LoginPage from "./components/Login";
 
 

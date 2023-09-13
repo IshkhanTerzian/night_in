@@ -2,7 +2,7 @@ import React from 'react'
 import NavbarComponent from "./NavbarComponent";
 
 
-function ForumPage() {
+function Forum() {
   return (
     <>
       <NavbarComponent />
@@ -12,4 +12,4 @@ function ForumPage() {
   )
 }
 
-export default ForumPage
+export default Forum

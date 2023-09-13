@@ -5,7 +5,7 @@ import CocktailObject from "./CocktailObject";
 
 import NavbarComponent from "./NavbarComponent";
 
-function RecipePage() {
+function Recipes() {
   const alcoholFilters = [
     "Vodka",
     "Whiskey",
@@ -133,4 +133,4 @@ function RecipePage() {
   );
 }
 
-export default RecipePage;
+export default Recipes;
