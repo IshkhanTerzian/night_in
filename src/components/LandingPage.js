@@ -1,7 +1,8 @@
+import React from "react";
 import { Container, Image, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import NavbarComponent from "./NavbarComponent";
-import CocktailObject from "./CocktailObject";
+import CocktailCard from "./CocktailCard";
 import "../styles/LandingPage.css";
 import Footer from "./Footer";
 
@@ -38,11 +39,12 @@ function LandingPage() {
         </Container>
 
         <Container className="mb-4">
-          <Row>
-            <CocktailObject
+          <Row className="justify-content-between">
+            <CocktailCard
               imageSrc="https://www.liquor.com/thmb/opuU8zi3Hm40X9dazbbSTr-EEMg=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Spicy_Margarita_2597x2597_primary-4460e82ef0b24462883ae97db8e4b5bf.jpg"
               onClick={() => handleImageClick("Margarita")}
               cocktailName="Margarita"
+              buttonText="Find Recipe"
             />
             <Col md={6}>
               <h1>Most Searched Cocktail</h1>
@@ -67,26 +69,30 @@ function LandingPage() {
         <Container>
           <h1 className="text-center mb-3">Other Cocktail Recipes!</h1>
 
-          <Row>
-            <CocktailObject
+          <Row className="justify-content-between">
+            <CocktailCard
               imageSrc="https://www.seriouseats.com/thmb/-SLJr8K8XKqQH6swSqLu2oxgzXc=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2014__08__20120122-188625-yusho-pisco-punch-610p-3c834f44c9c8408aa4929ec251ef1e44.jpg"
               onClick={() => handleImageClick("Pisco Punch")}
               cocktailName="Pisco Punch"
+              buttonText="Find Recipe"
             />
-            <CocktailObject
+            <CocktailCard
               imageSrc="https://www.liquor.com/thmb/vFCt_txNBLFVkLdSNbxPbsjo27Q=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/hanky-panky-720x720-primary-00b7166e4c16427795707b3121c00178.jpg"
               onClick={() => handleImageClick("Hanky-Panky")}
               cocktailName="Hanky-Panky"
+              buttonText="Find Recipe"
             />
-            <CocktailObject
+            <CocktailCard
               imageSrc="https://www.liquor.com/thmb/xPAsh2K8KIa9U4pW4XiMOMYGV3s=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__liquor__2019__03__14090749__Long-Island-Iced-Tea-720x720-article-272623f47e80457594178a552f708068.jpg"
               onClick={() => handleImageClick("Long Island Iced Tea")}
               cocktailName="Long Island Iced Tea"
+              buttonText="Find Recipe"
             />
-            <CocktailObject
+            <CocktailCard
               imageSrc="https://www.liquor.com/thmb/jS6tetULiZ09eJDoPlY6wM4Ft1I=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/whiskey-sour-1500x1500-hero-c9df509bb1d141f1a8424051c3d78445.jpg"
               onClick={() => handleImageClick("Whiskey Sour")}
               cocktailName="Whiskey Sour"
+              buttonText="Find Recipe"
             />
           </Row>
         </Container>

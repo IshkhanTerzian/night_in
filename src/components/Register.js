@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import Footer from "./Footer";
+import axios from 'axios';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -16,41 +17,23 @@ const Register = () => {
     password: "",
   });
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+  
+    console.log("Request Body:", formData);
+  
+    try {
+      const response = await axios.post('http://localhost:3001/register', {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
 
-    setErrors({
-      username: "",
-      email: "",
-      password: "",
-    });
-
-    if (formData.username.length < 5 || formData.username.length > 10) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        username: "Username must be between 5 and 10 characters.",
-      }));
-      return;
+      });
+      
+      console.log("Registration successful:", response.data.message);
+    } catch (error) {
+      console.error("Registration failed:", error.response.data.error);
     }
-
-    const emailHost = formData.email.split("@")[1];
-    if (!emailHost || !emailHost.includes(".")) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        email: "Invalid email address.",
-      }));
-      return;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        password: "Passwords do not match.",
-      }));
-      return;
-    }
-
-    console.log("Registration data:", formData);
   };
 
   return (
