@@ -1,0 +1,17 @@
+.ingredient-instruction {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .ingredient-instruction p {
+    margin: 0;
+  }
+  
+  .ingredient-instruction span {
+    font-weight: bold;
+    color: #007bff; /* Blue color for emphasis */
+  }
+  

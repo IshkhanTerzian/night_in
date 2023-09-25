@@ -1,0 +1,20 @@
+/* Recipes.css */
+
+/* Style for the filter titles */
+.filter-title {
+    color: red;
+    font-size: 24px;
+  }
+  
+  /* Style for the filter subtitles */
+  .filter-subtitle {
+    color: red;
+    font-size: 20px;
+  }
+  
+  /* Style for the filter content (list items) */
+  .list-group-item {
+    color: red;
+    /* Add any other styles you want for the filter content here */
+  }
+  

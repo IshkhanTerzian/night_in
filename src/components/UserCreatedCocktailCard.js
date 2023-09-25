@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button, Col } from "react-bootstrap";
-import "../styles/CocktailCard.css"
+import "../styles/CocktailCard.css"; 
 
-const CocktailCard = ({
+const UserCreatedCocktailCard = ({
   imageSrc,
   onClick,
   cocktailName,
@@ -15,11 +15,15 @@ const CocktailCard = ({
     if (imageSrc && imageSrc.data) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setBase64ImageSrc(e.target.result);
+        const base64Src = e.target.result;
+        setBase64ImageSrc(base64Src);
       };
       reader.readAsDataURL(
         new Blob([new Uint8Array(imageSrc.data)], { type: "image/png" })
       );
+    } else {
+      console.log("Image Source (URL):", imageSrc); 
+      setBase64ImageSrc(imageSrc);
     }
   }, [imageSrc]);
 
@@ -34,7 +38,7 @@ const CocktailCard = ({
         <Card.Body className="text-center">
           <Card.Title>{cocktailName}</Card.Title>
           <Button
-            variant="info" 
+            variant="primary" 
             onClick={onClick}
             className="custom-button"
           >
@@ -46,4 +50,4 @@ const CocktailCard = ({
   );
 };
 
-export default CocktailCard;
+export default UserCreatedCocktailCard;

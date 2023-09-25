@@ -1,28 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Image, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 import NavbarComponent from "./NavbarComponent";
 import CocktailCard from "./CocktailCard";
-import "../styles/LandingPage.css";
 import Footer from "./Footer";
+import "../styles/LandingPage.css";
 
 function LandingPage() {
   const navigate = useNavigate();
+  const [cocktailData, setCocktailData] = useState([]);
 
-  const handleFindRecipesClick = () => {
-    navigate("/recipes");
-  };
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/recipes")
+      .then((res) => {
+        setCocktailData(res.data);
+      })
+      .catch((err) => {
+        console.err("Error fetching data:", err);
+      });
+  }, []);
 
-  const handleImageClick = (info) => {
-    console.log("Clicked Cocktail Info:", info);
+  const handleImageClick = (cocktailId) => {
+    navigate(`/recipedetailpage/${cocktailId}`);
   };
 
   return (
     <div>
-      <header>
-        <NavbarComponent />
-      </header>
-
+      <NavbarComponent />
       <main>
         <Container fluid style={{ padding: 0 }} className="mb-4">
           <div className="image-with-text-container">
@@ -40,12 +47,17 @@ function LandingPage() {
 
         <Container className="mb-4">
           <Row className="justify-content-between">
-            <CocktailCard
-              imageSrc="https://www.liquor.com/thmb/opuU8zi3Hm40X9dazbbSTr-EEMg=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Spicy_Margarita_2597x2597_primary-4460e82ef0b24462883ae97db8e4b5bf.jpg"
-              onClick={() => handleImageClick("Margarita")}
-              cocktailName="Margarita"
-              buttonText="Find Recipe"
-            />
+            <Col md={6}>
+              {cocktailData.length > 1 ? (
+                <CocktailCard
+                  imageSrc={cocktailData[0].CocktailImage}
+                  onClick={() => handleImageClick(cocktailData[0].CocktailID)}
+                  cocktailName={cocktailData[0].CocktailName}
+                  buttonText="View Details"
+                  size={6}
+                />
+              ) : null}
+            </Col>
             <Col md={6}>
               <h1>Most Searched Cocktail</h1>
               <p>
@@ -57,43 +69,24 @@ function LandingPage() {
                 most ubiquitous drinks today—one that has spawned countless
                 variations.
               </p>
-              <button
-                className="btn btn-primary"
-                onClick={handleFindRecipesClick}
-              >
-                Find Recipe
-              </button>
             </Col>
           </Row>
         </Container>
+
         <Container>
           <h1 className="text-center mb-3">Other Cocktail Recipes!</h1>
 
-          <Row className="justify-content-between">
-            <CocktailCard
-              imageSrc="https://www.seriouseats.com/thmb/-SLJr8K8XKqQH6swSqLu2oxgzXc=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2014__08__20120122-188625-yusho-pisco-punch-610p-3c834f44c9c8408aa4929ec251ef1e44.jpg"
-              onClick={() => handleImageClick("Pisco Punch")}
-              cocktailName="Pisco Punch"
-              buttonText="Find Recipe"
-            />
-            <CocktailCard
-              imageSrc="https://www.liquor.com/thmb/vFCt_txNBLFVkLdSNbxPbsjo27Q=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/hanky-panky-720x720-primary-00b7166e4c16427795707b3121c00178.jpg"
-              onClick={() => handleImageClick("Hanky-Panky")}
-              cocktailName="Hanky-Panky"
-              buttonText="Find Recipe"
-            />
-            <CocktailCard
-              imageSrc="https://www.liquor.com/thmb/xPAsh2K8KIa9U4pW4XiMOMYGV3s=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__liquor__2019__03__14090749__Long-Island-Iced-Tea-720x720-article-272623f47e80457594178a552f708068.jpg"
-              onClick={() => handleImageClick("Long Island Iced Tea")}
-              cocktailName="Long Island Iced Tea"
-              buttonText="Find Recipe"
-            />
-            <CocktailCard
-              imageSrc="https://www.liquor.com/thmb/jS6tetULiZ09eJDoPlY6wM4Ft1I=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/whiskey-sour-1500x1500-hero-c9df509bb1d141f1a8424051c3d78445.jpg"
-              onClick={() => handleImageClick("Whiskey Sour")}
-              cocktailName="Whiskey Sour"
-              buttonText="Find Recipe"
-            />
+          <Row className="justify-content-between mb-4">
+            {cocktailData.slice(1, 5).map((cocktail, index) => (
+              <CocktailCard
+                key={index}
+                imageSrc={cocktail.CocktailImage}
+                onClick={() => handleImageClick(cocktail.CocktailID)}
+                cocktailName={cocktail.CocktailName}
+                buttonText="View Details"
+                size={3}
+              />
+            ))}
           </Row>
         </Container>
       </main>

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
-import Footer from "./Footer";
 import axios from 'axios';
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -11,26 +13,16 @@ const Register = () => {
     confirmPassword: "",
   });
 
-  const [errors, setErrors] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-
   const handleRegister = async (e) => {
     e.preventDefault();
   
-    console.log("Request Body:", formData);
-  
     try {
-      const response = await axios.post('http://localhost:3001/register', {
+      await axios.post('http://localhost:3001/register', {
         username: formData.username,
         email: formData.email,
         password: formData.password,
-
       });
-      
-      console.log("Registration successful:", response.data.message);
+      navigate("/successfulregistration");
     } catch (error) {
       console.error("Registration failed:", error.response.data.error);
     }
@@ -57,9 +49,6 @@ const Register = () => {
                   required
                   className="centered-text-input"
                 />
-                {errors.username && (
-                  <Alert variant="danger">{errors.username}</Alert>
-                )}
               </Form.Group>
 
               <Form.Group controlId="email">
@@ -73,7 +62,6 @@ const Register = () => {
                   required
                   className="centered-text-input"
                 />
-                {errors.email && <Alert variant="danger">{errors.email}</Alert>}
               </Form.Group>
 
               <Form.Group controlId="password">
@@ -87,9 +75,6 @@ const Register = () => {
                   required
                   className="centered-text-input"
                 />
-                {errors.password && (
-                  <Alert variant="danger">{errors.password}</Alert>
-                )}
               </Form.Group>
 
               <Form.Group controlId="confirmPassword">
@@ -115,7 +100,6 @@ const Register = () => {
           </Col>
         </Row>
       </Container>
-      <Footer />
     </>
   );
 };
