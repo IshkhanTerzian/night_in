@@ -1,16 +1,15 @@
 .custom-button {
-  background-color: transparent; /* Remove background color */
-  border: 1px solid #007bff; /* Add border */
-  margin-right: 40px; /* Increase spacing between buttons */
+  background-color: transparent; 
+  border: 1px solid #007bff; 
+  margin-right: 40px; 
   color: black;
 }
 
-/* Make the text inside buttons bold */
 .bold-text {
   font-weight: bold;
 }
 
 .full-width-image {
   width: 100%;
-  height: auto; /* Maintain aspect ratio */
+  height: auto; 
 }

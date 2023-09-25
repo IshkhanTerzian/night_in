@@ -1,24 +1,20 @@
 /* NavbarComponent.css */
 
-/* Style for the brand/logo */
 .brand-text {
     font-weight: bold;
     font-size: 24px;
   }
   
-  /* Style for the navigation links */
   .nav-link {
     font-weight: bold;
     font-size: 16px;
   }
   
-  /* Style for the dropdown items */
   .dropdown-item {
     font-weight: bold;
     font-size: 16px;
   }
   
-  /* Style for the Log In button */
   .btn-primary {
     font-weight: bold;
     font-size: 16px;

@@ -1,16 +1,15 @@
-/* Custom styles for CocktailCard */
 .custom-card {
-    border: 2px solid #333; /* Darker border color */
-    text-align: center; /* Center the text */
+    border: 2px solid #333; 
+    text-align: center; 
   }
   
   .custom-card-img {
-    max-height: 200px; /* Set a maximum height for the image */
+    max-height: 200px; 
   }
   
   .custom-button {
-    background-color: #17a2b8; /* Change button color to a different color (info color in this example) */
-    color: white; /* Button text color */
-    width: 100%; /* Make the button full width */
+    background-color: #17a2b8; 
+    color: white; 
+    width: 100%; 
   }
   
