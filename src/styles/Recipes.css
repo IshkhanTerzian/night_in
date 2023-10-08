@@ -1,14 +1,16 @@
-.filter-title {
-    color: red;
-    font-size: 24px;
-  }
-  
-  .filter-subtitle {
-    color: red;
-    font-size: 20px;
-  }
-  
-  .list-group-item {
-    color: red;
-  }
-  
+.image-with-text-container {
+  padding: 0;
+}
+
+#searchForm {
+  width: 100%;
+}
+
+#searchButton {
+  width: 100%;
+}
+
+.pagination {
+  margin-top: 1.5rem;
+  justify-content: center;
+}

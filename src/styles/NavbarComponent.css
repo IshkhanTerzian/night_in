@@ -1,22 +1,19 @@
-/* NavbarComponent.css */
-
 .brand-text {
-    font-weight: bold;
-    font-size: 24px;
-  }
-  
-  .nav-link {
-    font-weight: bold;
-    font-size: 16px;
-  }
-  
-  .dropdown-item {
-    font-weight: bold;
-    font-size: 16px;
-  }
-  
-  .btn-primary {
-    font-weight: bold;
-    font-size: 16px;
-  }
-  
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.nav-link {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.dropdown-item {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.btn-primary {
+  font-weight: bold;
+  font-size: 16px;
+}

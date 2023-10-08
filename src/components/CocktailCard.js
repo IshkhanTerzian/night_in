@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button, Col } from "react-bootstrap";
-import "../styles/CocktailCard.css"
 
-const CocktailCard = ({
-  imageSrc,
-  onClick,
-  cocktailName,
-  buttonText,
-  size,
-}) => {
+import "../styles/CocktailCard.css";
+
+const CocktailCard = ({ imageSrc, onClick, cocktailName, buttonText, size, }) => {
+
+  // Variable that holds the converted base64Image of the cocktail to be rendered
   const [base64ImageSrc, setBase64ImageSrc] = useState("");
 
   useEffect(() => {
@@ -18,7 +15,7 @@ const CocktailCard = ({
         setBase64ImageSrc(e.target.result);
       };
       reader.readAsDataURL(
-        new Blob([new Uint8Array(imageSrc.data)], { type: "image/png" })
+        new Blob([new Uint8Array(imageSrc.data)], { type: "image/*" })
       );
     }
   }, [imageSrc]);
@@ -33,11 +30,7 @@ const CocktailCard = ({
         />
         <Card.Body className="text-center">
           <Card.Title>{cocktailName}</Card.Title>
-          <Button
-            variant="info" 
-            onClick={onClick}
-            className="custom-button"
-          >
+          <Button variant="info" onClick={onClick} className="custom-button">
             {buttonText}
           </Button>
         </Card.Body>

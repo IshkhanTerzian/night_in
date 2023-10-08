@@ -8,34 +8,46 @@ import "../styles/Login.css";
 import Footer from "./Footer";
 
 const Login = () => {
-  const { login } = useAuth();
   const navigate = useNavigate();
 
+  // Variable to check if the user has logged in
+  const { login } = useAuth();
+
+  // Variable to hold the UserName
   const [username, setUsername] = useState("");
+
+  // Variable to hold the password
   const [password, setPassword] = useState("");
+
+  // Variable to hold the error message
   const [errorMessage, setErrorMessage] = useState("");
 
+  /**
+   * Sends a POST request to the backend with the provided username and password,
+   * upon successful login stores user data in local storage.
+   * @param {Event} e - The form submission event
+   */
   const handleLogin = (e) => {
-  e.preventDefault();
-  axios
-    .post("http://localhost:3001/login", { username, password })
-    .then((response) => {
-      const loggedInUser = response.data.user;
-      login(loggedInUser.UserName, loggedInUser.UserId);
+    e.preventDefault();
+    axios
+      .post("http://localhost:3001/login", { username, password })
+      .then((response) => {
+        const loggedInUser = response.data.user;
+        login(loggedInUser.UserName, loggedInUser.UserId);
+        localStorage.setItem("username", loggedInUser.UserName);
+        localStorage.setItem("userId", loggedInUser.UserId);
+        localStorage.setItem("userType", loggedInUser.UserType);
+        navigate("/landingpage");
+      })
+      .catch((error) => {
+        console.error(error.response.data.error);
+        setErrorMessage("Login failed. Please check your credentials.");
+      });
+  };
 
-      console.log("UserType:", loggedInUser.UserType);
-
-      localStorage.setItem("username", loggedInUser.UserName);
-      localStorage.setItem("userId", loggedInUser.UserId);
-      localStorage.setItem("userType", loggedInUser.UserType);
-      navigate("/landingpage");
-    })
-    .catch((error) => {
-      console.error(error.response.data.error);
-      setErrorMessage("Login failed. Please check your credentials.");
-    });
-};
-
+  /**
+   * Navigates to the registration page when the button is clicked
+   */
   const handleRegisterClick = () => {
     navigate("/register");
   };

@@ -1,0 +1,24 @@
+.forum-post-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.forum-post-title {
+  font-size: 50px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.forum-post-user {
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.forum-post-text {
+  white-space: pre-line;
+}
+
+.comment-textarea {
+  resize: none;
+}

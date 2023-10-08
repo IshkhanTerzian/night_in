@@ -1,0 +1,56 @@
+.forum-title {
+  font-size: 40px;
+  margin: 20px 0;
+}
+
+.forum-subtitle {
+  font-size: 25px;
+  margin: 20px 0;
+}
+
+.create-button {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.btn-group {
+  margin-top: 20px;
+}
+
+.btn-secondary.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.table {
+  font-size: 16px;
+}
+
+.table th {
+  font-size: 24px;
+  background-color: lightgray;
+}
+
+.table td {
+  font-size: 18px;
+}
+
+.table a {
+  text-decoration: none;
+  color: black;
+}
+
+.table a:hover {
+  text-decoration: underline;
+  color: #007bff;
+}
+
+.table p {
+  font-size: 20px;
+  color: darkgrey;
+}
+
+.table .btn-danger {
+  font-size: 16px;
+  padding: 6px 12px;
+}

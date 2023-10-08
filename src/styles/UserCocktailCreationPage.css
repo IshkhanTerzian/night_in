@@ -1,17 +1,29 @@
+.image-container {
+  background-color: #f8f9fa;
+  text-align: center;
+  position: relative;
+  padding: 3rem;
+}
+
+.image-container img {
+  max-height: 50%;
+  max-width: 50%;
+  height: auto;
+  width: auto;
+}
+
 .ingredient-instruction {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-  
-  .ingredient-instruction p {
-    margin: 0;
-  }
-  
-  .ingredient-instruction span {
-    font-weight: bold;
-    color: #007bff; 
-  }
-  
+  margin-top: 2rem;
+}
+
+.remove-ingredient-button {
+  font-size: 18px;
+}
+
+.add-ingredient-button {
+  margin-left: 1rem;
+}
+
+.submit-button {
+  margin-top: 2rem;
+}

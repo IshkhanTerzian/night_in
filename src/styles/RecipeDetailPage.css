@@ -1,7 +1,7 @@
 .custom-button {
-  background-color: transparent; 
-  border: 1px solid #007bff; 
-  margin-right: 40px; 
+  background-color: transparent;
+  border: 1px solid #007bff;
+  margin-right: 40px;
   color: black;
 }
 
@@ -11,5 +11,13 @@
 
 .full-width-image {
   width: 100%;
-  height: auto; 
+  height: auto;
+}
+
+p {
+  font-size: 24px;
+}
+
+ul {
+  font-size: 20px;
 }

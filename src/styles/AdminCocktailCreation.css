@@ -1,0 +1,29 @@
+.instructions-textarea {
+  height: 200px;
+  width: 100%;
+  overflow-y: auto;
+  resize: none;
+}
+
+.description-textarea {
+  height: 200px;
+  width: 100%;
+  overflow-y: auto;
+  resize: none;
+}
+
+.upload-button {
+  font-size: 36px;
+}
+
+.submit-button {
+  margin-top: 20px;
+}
+
+.remove-ingredient-button {
+  font-size: 18px;
+}
+
+.add-ingredient-button {
+  margin-left: 5px;
+}

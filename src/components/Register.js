@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
-import axios from 'axios';
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
 
+  // Variable that holds the form data object
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -13,11 +14,15 @@ const Register = () => {
     confirmPassword: "",
   });
 
+  /**
+   * Handles the register process
+   * @param {Event} e The form submission event
+   */
   const handleRegister = async (e) => {
     e.preventDefault();
-  
+
     try {
-      await axios.post('http://localhost:3001/register', {
+      await axios.post("http://localhost:3001/register", {
         username: formData.username,
         email: formData.email,
         password: formData.password,

@@ -1,41 +1,60 @@
 import React, { useState } from "react";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import NavbarComponent from "./NavbarComponent";
+import "../styles/AdminCocktailCreation.css";
 
 const AdminCocktailCreation = () => {
+  const navigate = useNavigate();
+
+  // Storing the image of the cocktail
   const [imageFile, setImageFile] = useState(null);
+
+  // Name of a cocktail
+  const [cocktailName, setCocktailName] = useState("");
+
+  // Description of a cocktail
+  const [description, setDescription] = useState("");
+
+  // Instructions for a cocktail
+  const [instructions, setInstructions] = useState("");
+
+  // AlcoholType of the cocktail
+  const [alcoholTypeID, setAlcoholTypeID] = useState(1);
+
+  // Array to hold all the ingredients for a cocktail
   const [ingredientLines, setIngredientLines] = useState([]);
+
+  // An object that holds each requirement of an ingredient
   const [newIngredient, setNewIngredient] = useState({
     quantity: "",
     unit: "",
     ingredientID: "",
   });
-  const [cocktailName, setCocktailName] = useState("");
-  const [description, setDescription] = useState("");
-  const [instructions, setInstructions] = useState("");
-  const [alcoholTypeID, setAlcoholTypeID] = useState(1);
 
-  const handleFileInputChange = (event) => {
-    const file = event.target.files[0];
+  /**
+   * Handles the change event when a file is selected in the input field.
+   * @param {Event} e - The event object representing the input change event.
+   */
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
     setImageFile(file);
   };
 
-  const handleNewIngredientChange = (event) => {
-    const ingredientText = event.target.value;
-    setNewIngredient(ingredientText);
-  };
-
+  /**
+   * Adds a new ingredient object into the ingrientLines object
+   */
   const addNewIngredient = () => {
-    const ingredientObject = {
+    const ingredientAdded = {
       quantity: newIngredient.quantity,
       unit: newIngredient.unit,
       ingredientID: newIngredient.ingredientID,
     };
-  
-    setIngredientLines([...ingredientLines, ingredientObject]);
-  
+
+    setIngredientLines([...ingredientLines, ingredientAdded]);
+
     setNewIngredient({
       quantity: "",
       unit: "",
@@ -43,17 +62,23 @@ const AdminCocktailCreation = () => {
     });
   };
 
+  /**
+   * Removes an ingredient from the list of ingredient lines.
+   * @param {number} index - The index of the ingredient to be removed.
+   */
   const removeIngredient = (index) => {
     const updatedIngredients = [...ingredientLines];
     updatedIngredients.splice(index, 1);
     setIngredientLines(updatedIngredients);
   };
 
+  /**
+   * Handles the form submission when creating a new cocktail.
+   * Sends a POST request to the server with cocktail data.
+   */
   const handleSubmit = async () => {
     try {
       const imageBase64 = await convertImageToBase64(imageFile);
-
-      console.log("Image converted to base64:", imageBase64);
 
       const requestData = {
         CocktailName: cocktailName,
@@ -63,8 +88,6 @@ const AdminCocktailCreation = () => {
         CocktailImage: imageBase64,
         AlcoholTypeID: alcoholTypeID,
       };
-
-      console.log("Data being sent to the server:", requestData);
 
       const response = await axios.post(
         `http://localhost:3001/admincreatingcocktail/`,
@@ -76,12 +99,18 @@ const AdminCocktailCreation = () => {
         }
       );
 
-      console.log("Response from server:", response.data);
+      navigate("/recipes");
+
     } catch (error) {
       console.error("Error sending data:", error);
     }
   };
 
+  /**
+   * Converts an image file to base64 format.
+   * @param {File} imageFile - The image file to be converted.
+   * @returns {Promise<string|null>} A promise that resolves with the base64 data or null if no file is provided.
+   */
   const convertImageToBase64 = (imageFile) => {
     return new Promise((resolve, reject) => {
       if (!imageFile) {
@@ -90,7 +119,6 @@ const AdminCocktailCreation = () => {
         const reader = new FileReader();
         reader.onloadend = () => {
           const base64Data = reader.result.split(",")[1];
-          console.log("Image converted to base64:", base64Data);
           resolve(base64Data);
         };
         reader.onerror = reject;
@@ -109,14 +137,8 @@ const AdminCocktailCreation = () => {
               {imageFile ? (
                 <img
                   src={URL.createObjectURL(imageFile)}
-                  alt="Selected Image"
+                  alt=""
                   className="img-fluid"
-                  style={{
-                    maxHeight: "50%",
-                    maxWidth: "50%",
-                    height: "auto",
-                    width: "auto",
-                  }}
                 />
               ) : (
                 <Form.Group controlId="formFile" className="mb-0">
@@ -128,7 +150,7 @@ const AdminCocktailCreation = () => {
                   />
                   <Button
                     variant="link"
-                    style={{ fontSize: "36px" }}
+                    className="upload-button"
                     as="label"
                     htmlFor="formFile"
                   >
@@ -156,12 +178,7 @@ const AdminCocktailCreation = () => {
                   <Form.Control
                     as="textarea"
                     rows={5}
-                    style={{
-                      height: "200px",
-                      width: "100%",
-                      overflowY: "auto",
-                      resize: "none",
-                    }}
+                    className="description-textarea"
                     placeholder="Describe your cocktail!"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
@@ -194,7 +211,7 @@ const AdminCocktailCreation = () => {
                         {line.quantity} {line.unit} {line.ingredientID}
                         <Button
                           variant="link"
-                          style={{ fontSize: "18px" }}
+                          className="remove-ingredient-button"
                           onClick={() => removeIngredient(index)}
                         >
                           Remove
@@ -254,8 +271,8 @@ const AdminCocktailCreation = () => {
 
                   <Button
                     variant="primary"
+                    className="add-ingredient-button"
                     onClick={addNewIngredient}
-                    className="mx-5"
                   >
                     Add Ingredient
                   </Button>
@@ -273,19 +290,19 @@ const AdminCocktailCreation = () => {
               <Form.Control
                 as="textarea"
                 rows={5}
-                style={{
-                  height: "200px",
-                  width: "100%",
-                  overflowY: "auto",
-                  resize: "none",
-                }}
+                className="instructions-textarea"
                 placeholder="Enter instructions for making your cocktail!"
                 value={instructions}
                 onChange={(e) => setInstructions(e.target.value)}
               />
             </Form.Group>
             <Container className="text-center">
-              <Button variant="primary" size="lg" onClick={handleSubmit}>
+              <Button
+                variant="primary"
+                size="lg"
+                className="submit-button"
+                onClick={handleSubmit}
+              >
                 Submit Your Recipe
               </Button>
             </Container>

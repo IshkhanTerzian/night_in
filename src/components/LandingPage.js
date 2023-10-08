@@ -10,19 +10,25 @@ import "../styles/LandingPage.css";
 
 function LandingPage() {
   const navigate = useNavigate();
+
+  // Array to hold the cocktails being called from the DB
   const [cocktailData, setCocktailData] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://localhost:3001/recipes")
-      .then((res) => {
-        setCocktailData(res.data);
+      .then((response) => {
+        setCocktailData(response.data);
       })
       .catch((err) => {
         console.err("Error fetching data:", err);
       });
   }, []);
 
+  /**
+   * Handles the event to send the user to the detail page of the cocktail
+   * @param {number} cocktailId
+   */
   const handleImageClick = (cocktailId) => {
     navigate(`/recipedetailpage/${cocktailId}`);
   };
@@ -59,22 +65,16 @@ function LandingPage() {
               ) : null}
             </Col>
             <Col md={6}>
-              <h1>Most Searched Cocktail</h1>
+              <h1 className="mb-3">Most Searched Cocktail</h1>
               <p>
-                The classic Margarita is one of the most popular cocktails in
-                the world. Despite having no clear provenance, the combination
-                of tequila and lime juice, plus agave syrup and/or orange
-                liqueur, has charmed drinkers since its inception,
-                circumnavigating its way around the globe to become one of the
-                most ubiquitous drinks today—one that has spawned countless
-                variations.
+                {cocktailData.length > 1 ? cocktailData[0].Description : null}
               </p>
             </Col>
           </Row>
         </Container>
 
         <Container>
-          <h1 className="text-center mb-3">Other Cocktail Recipes!</h1>
+          <h1 className="text-center mb-4">Other Cocktail Recipes!</h1>
 
           <Row className="justify-content-between mb-4">
             {cocktailData.slice(1, 5).map((cocktail, index) => (

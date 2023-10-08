@@ -1,63 +1,105 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
-
 import NavbarComponent from "./NavbarComponent";
-import "../styles/UserCocktailCreationPage.css";
+import "../styles/UpdatingUserCreatedCocktail.css"; // Import your external CSS file here
 
-const UserCocktailCreationPage = () => {
+const UpdatingUserCreatedCocktail = () => {
   const navigate = useNavigate();
-
-  // Variable to hold the user's ID
-  const { userId } = useParams();
-
-  // Variable to hold the image file being uploaded
+  const { usercocktailId } = useParams();
+  const [editedCocktailName, setEditedCocktailName] = useState("");
+  const [editedDescription, setEditedDescription] = useState("");
+  const [editedInstructions, setEditedInstructions] = useState("");
+  const [ingredientLines, setIngredientLines] = useState([]);
+  const [newIngredient, setNewIngredient] = useState("");
+  const [quantityError, setQuantityError] = useState("");
   const [imageFile, setImageFile] = useState(null);
 
-  // Array to hold the list of ingredients for a cocktail
-  const [ingredientLines, setIngredientLines] = useState([]);
+  useEffect(() => {
+    const fetchUserCreatedCocktailDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/usercreatedcocktaildetailpage/${usercocktailId}`
+        );
+        const data = response.data;
+        const parsedIngredients = JSON.parse(data.Ingredients);
+        setIngredientLines(parsedIngredients);
+        setEditedCocktailName(data.CocktailName);
+        setEditedDescription(data.Description);
+        setEditedInstructions(data.Instructions);
+      } catch (error) {
+        console.error(
+          "Error fetching user-created cocktail information:",
+          error
+        );
+      }
+    };
+    fetchUserCreatedCocktailDetails();
+  }, [usercocktailId]);
 
-  // Variable to add a new ingredient
-  const [newIngredient, setNewIngredient] = useState("");
+  const handleUpdateCocktail = async () => {
+    try {
+      const imageBase64 = await convertImageToBase64(imageFile);
 
-  // Variable that holds the name of the cocktail
-  const [cocktailName, setCocktailName] = useState("");
+      const updatedCocktailData = {
+        CocktailName: editedCocktailName,
+        Description: editedDescription,
+        Instructions: editedInstructions,
+        Ingredients: JSON.stringify(ingredientLines),
+        CocktailImage: imageBase64,
+      };
 
-  // Variable that holds the description of the cocktail
-  const [description, setDescription] = useState("");
+      const response = await axios.post(
+        `http://localhost:3001/updateUserCreatedCocktail/${usercocktailId}`,
+        updatedCocktailData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-  // Variable that holds the instructions of the cocktail
-  const [instructions, setInstructions] = useState("");
+      navigate(`/usercreatedcocktaildetailpage/${usercocktailId}`);
 
-  // Variable that holds the error message
-  const [quantityError, setQuantityError] = useState("");
+      if (response.status === 200) {
+      } else {
+        console.error("Error updating cocktail:", response.data);
+      }
+    } catch (error) {
+      console.error("Error updating cocktail:", error);
+    }
+  };
 
-  /**
-   * Handles the change event when a file input for an image is selected
-   * @param {Event} e - Object representing the file input change
-   */
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     setImageFile(file);
   };
 
-  /**
-   * Handles the change event when a new ingredient is entered
-   * @param {Event} e  Object representing the input change
-   */
+  const convertImageToBase64 = (imageFile) => {
+    return new Promise((resolve, reject) => {
+      if (!imageFile) {
+        resolve(null);
+      } else {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const base64Data = reader.result.split(",")[1];
+          resolve(base64Data);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(imageFile);
+      }
+    });
+  };
+
   const handleNewIngredientChange = (e) => {
     const ingredientText = e.target.value;
     setNewIngredient(ingredientText);
   };
 
-  /**
-   * Adds a new ingredient to the ingredient array
-   */
   const addNewIngredient = () => {
     if (newIngredient.trim() !== "") {
       const [quantity] = newIngredient.split(" ");
-
       const quantityValue = parseFloat(quantity);
 
       if (
@@ -76,68 +118,10 @@ const UserCocktailCreationPage = () => {
     }
   };
 
-  /**
-   * Removes an ingredient from the ingredient array
-   * @param {number} index - The index of the ingredient to remove
-   */
   const removeIngredient = (index) => {
     const updatedIngredients = [...ingredientLines];
     updatedIngredients.splice(index, 1);
     setIngredientLines(updatedIngredients);
-  };
-
-  /**
-   * Handles the form submission by sending data to the backend
-   */
-  const handleSubmit = async () => {
-    try {
-      const imageBase64 = await convertImageToBase64(imageFile);
-
-      const requestData = {
-        userId,
-        CocktailName: cocktailName,
-        Description: description,
-        Ingredients: ingredientLines,
-        Instructions: instructions,
-        CocktailImage: imageBase64,
-      };
-
-      const response = await axios.post(
-        `http://localhost:3001/usercreatingcocktail/${userId}`,
-        requestData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      navigate("/recipes");
-
-    } catch (error) {
-      console.error("Error sending data:", error);
-    }
-  };
-
-  /**
-   * Converts an image file to base64 format
-   * @param {File} imageFile - The image file to convert
-   * @returns {Promise<string|null>} A Promise that resolves to the base64-encoded image data or null if no file is provided
-   */
-  const convertImageToBase64 = (imageFile) => {
-    return new Promise((resolve, reject) => {
-      if (!imageFile) {
-        resolve(null);
-      } else {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const base64Data = reader.result.split(",")[1];
-          resolve(base64Data);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(imageFile);
-      }
-    });
   };
 
   return (
@@ -163,7 +147,7 @@ const UserCocktailCreationPage = () => {
                   />
                   <Button
                     variant="link"
-                    style={{ fontSize: "36px" }}
+                    className="file-input-button" // Add this class
                     as="label"
                     htmlFor="formFile"
                   >
@@ -177,23 +161,24 @@ const UserCocktailCreationPage = () => {
           <Col md={6} className="mb-3">
             <Row>
               <Col>
-                <h2 className="mb-4">Enter a name for your Cocktail!</h2>
+                <h2 className="mb-4">Edit Cocktail Name</h2>
                 <Form.Group controlId="cocktailNameInput" className="mb-4">
                   <Form.Control
                     type="text"
                     placeholder="Cocktail Name"
-                    value={cocktailName}
-                    onChange={(e) => setCocktailName(e.target.value)}
+                    value={editedCocktailName}
+                    onChange={(e) => setEditedCocktailName(e.target.value)}
                   />
                 </Form.Group>
-                <h3 className="mb-4">Description</h3>
+                <h3 className="mb-4">Edit Description</h3>
                 <Form.Group controlId="row1Textarea" className="mb-4">
                   <Form.Control
                     as="textarea"
                     rows={5}
-                    placeholder="Describe your cocktail!"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Edit cocktail description"
+                    value={editedDescription}
+                    onChange={(e) => setEditedDescription(e.target.value)}
+                    
                   />
                 </Form.Group>
               </Col>
@@ -202,15 +187,8 @@ const UserCocktailCreationPage = () => {
               <Col>
                 <h3 className="mb-4">Ingredients</h3>
                 <div className="ingredient-instruction">
-                  <p style={{ fontSize: "20px" }}>
-                    Add an ingredient using this format:{" "}
-                    <span>Quantity Unit Ingredient</span>
-                  </p>
-                  <p className="text-muted" style={{ fontSize: "20px" }}>
-                    For example:{" "}
-                    <span style={{ fontWeight: "bold" }}>
-                      "1 oz Vodka" or "2 dashes Angostura Bitters"
-                    </span>
+                  <p className="ingredient-label">
+                    Add or remove ingredients below:
                   </p>
                   {quantityError && (
                     <p className="text-danger">{quantityError}</p>
@@ -259,14 +237,15 @@ const UserCocktailCreationPage = () => {
       <Col md={12}>
         <Row>
           <Col>
-            <h2 className="mb-4">Instructions</h2>
+            <h2 className="mb-4">Edit Instructions</h2>
             <Form.Group controlId="instructionsTextarea" className="mb-4">
               <Form.Control
                 as="textarea"
                 rows={5}
-                placeholder="Enter instructions for making your cocktail!"
-                value={instructions}
-                onChange={(e) => setInstructions(e.target.value)}
+                placeholder="Edit instructions for making your cocktail!"
+                value={editedInstructions}
+                onChange={(e) => setEditedInstructions(e.target.value)}
+                className="instructions-textarea"
               />
             </Form.Group>
             <Container className="text-center">
@@ -274,9 +253,9 @@ const UserCocktailCreationPage = () => {
                 variant="primary"
                 size="lg"
                 className="submit-button"
-                onClick={handleSubmit}
+                onClick={handleUpdateCocktail}
               >
-                Submit Your Recipe
+                Update Cocktail
               </Button>
             </Container>
           </Col>
@@ -286,4 +265,4 @@ const UserCocktailCreationPage = () => {
   );
 };
 
-export default UserCocktailCreationPage;
+export default UpdatingUserCreatedCocktail;

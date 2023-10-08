@@ -2,19 +2,35 @@ import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
-import "../styles/NavbarComponent.css"; 
+
+import "../styles/NavbarComponent.css";
 
 function NavbarComponent() {
   const navigate = useNavigate();
+
+  // Variables being imported into this component from useAuth
   const { loggedIn, loggedInUsername, logout } = useAuth();
 
+  /**
+   * Logs the user out of the application and navigates to the logout page
+   */
   const handleLogout = () => {
     logout();
     navigate("/logout");
   };
 
+  /**
+   * Navigates to the home page
+   */
   const handleLogin = () => {
     navigate("/");
+  };
+
+  /**
+   * Navigates to the user's profile page
+   */
+  const handleProfile = () => {
+    navigate(`/profile`);
   };
 
   return (
@@ -36,12 +52,17 @@ function NavbarComponent() {
               title={`Hello, ${loggedInUsername}`}
               id="basic-nav-dropdown"
             >
-              <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+              <NavDropdown.Item onClick={handleProfile}>
+                Settings
+              </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
             </NavDropdown>
           ) : (
-            <Nav.Link className="btn btn-primary border ml-auto" onClick={handleLogin}>
+            <Nav.Link
+              className="btn btn-primary border ml-auto"
+              onClick={handleLogin}
+            >
               Log In
             </Nav.Link>
           )}

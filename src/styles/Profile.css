@@ -1,0 +1,13 @@
+.clickable-text {
+  font-size: 30px;
+  cursor: pointer;
+  transition: font-weight 0.2s;
+}
+
+.clickable-text:hover {
+  font-weight: bold;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}

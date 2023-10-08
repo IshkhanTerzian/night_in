@@ -9,6 +9,7 @@ import CocktailCard from "./CocktailCard";
 import UserCreatedCocktailCard from "./UserCreatedCocktailCard";
 import FilterListGroup from "./FilterListGroup";
 
+// Import data to be used within this component
 import {
   alcoholFilters,
   flavorFilters,
@@ -17,6 +18,7 @@ import {
   adminFilters,
 } from "../data/filterLists";
 
+// Importing images saved within the project
 import EmptyBottle from "../assets/empty.png";
 import WhiskeyBottle from "../assets/whiskeybottle.jpg";
 import VodkaBottle from "../assets/vodka.png";
@@ -29,33 +31,48 @@ import AllCocktails from "../assets/allcocktails.png";
 
 function Recipes() {
   const navigate = useNavigate();
+
+  // Variable that holds the logged in UserID and UserType
   const { loggedInUserId, loggedInUserType } = useAuth();
 
+  // Array that holds the information of all the cocktails from the DB
   const [cocktailData, setCocktailData] = useState([]);
+
+  // Array that holds the information of all the user cocktails from the DB
   const [userCreatedCocktails, setUserCreatedCocktails] = useState([]);
+
+  // Array to hold the filtered cocktails depending on user's choice
   const [filteredCocktails, setFilteredCocktails] = useState([]);
+
+  // Array to set the correct filtering types
   const [activeFilters, setActiveFilters] = useState([]);
 
+  // Variable to hold the page pagination
   const [page, setPage] = useState(1);
-  const [totalFilteredPages, setTotalFilteredPages] = useState(1);
-  const [filteredItemCount, setFilteredItemCount] = useState(0);
+
+  // Variable to hold the selected filter of user's choice
   const [selectedFilter, setSelectedFilter] = useState(null);
+
+  // Variable t hold the input of search
   const [searchFilter, setSearchFilter] = useState("");
+
+  // Variable to set proper rendering of conditions
   const [yourCreationsFilterActive, setYourCreationsFilterActive] =
     useState(false);
+
+  // Variable to hold the images of alcohol types depending on user's filter choice
   const [alcoholSideImage, setalcoholSideImage] = useState(EmptyBottle);
 
-  const calculateTotalFilteredPages = () => {
-    const numCocktailCards = filteredCocktails.length;
-    const newTotalFilteredPages = Math.ceil(
-      numCocktailCards / cocktailsPerPage
-    );
-    setTotalFilteredPages(newTotalFilteredPages);
-  };
-
+  // Variable that sets max cocktails per page to be rendered
   const cocktailsPerPage = 9;
+
+  // Gets the last item index for the list
   const indexOfLastCocktail = page * cocktailsPerPage;
+
+  // Gets the first item index from the list
   const indexOfFirstCocktail = indexOfLastCocktail - cocktailsPerPage;
+
+  // Update to get the new rendered cocktails to be rendered on the screen
   const currentCocktails =
     filteredCocktails.length > 0
       ? filteredCocktails.slice(
@@ -65,18 +82,10 @@ function Recipes() {
       : cocktailData.slice(indexOfFirstCocktail, indexOfLastCocktail);
 
   useEffect(() => {
-    const numCocktailCards = filteredCocktails.length;
-    const newTotalFilteredPages = Math.ceil(
-      numCocktailCards / cocktailsPerPage
-    );
-    setTotalFilteredPages(newTotalFilteredPages);
-  }, [filteredCocktails, cocktailsPerPage]);
-
-  useEffect(() => {
     axios
       .get("http://localhost:3001/recipes")
-      .then((resp) => {
-        setCocktailData(resp.data);
+      .then((response) => {
+        setCocktailData(response.data);
       })
       .catch((err) => {
         console.err("Error fetching data:", err);
@@ -87,8 +96,8 @@ function Recipes() {
     if (loggedInUserId) {
       axios
         .get(`http://localhost:3001/usercreatedcocktails/${loggedInUserId}`)
-        .then((resp) => {
-          setUserCreatedCocktails(resp.data);
+        .then((response) => {
+          setUserCreatedCocktails(response.data);
         })
         .catch((err) => {
           console.err("Error fetching user-created cocktails:", err);
@@ -96,10 +105,17 @@ function Recipes() {
     }
   }, [loggedInUserId]);
 
-  const handleSearchChange = (event) => {
-    setSearchFilter(event.target.value);
+  /**
+   * Handles changes in the search input field
+   * @param {Event} e - The input field change event
+   */
+  const handleSearchChange = (e) => {
+    setSearchFilter(e.target.value);
   };
 
+  /**
+   * Handles the click event for the search button, filtering cocktails based on the search input
+   */
   const handleSearchClick = () => {
     const filtered = cocktailData.filter((cocktail) =>
       cocktail.CocktailName.toLowerCase().includes(searchFilter.toLowerCase())
@@ -107,10 +123,18 @@ function Recipes() {
     setFilteredCocktails(filtered);
   };
 
+  /**
+   * Handles pagination clicks to switch between pages of cocktails
+   * @param {number} pageNumber - The page number to navigate to
+   */
   const handlePaginationClick = (pageNumber) => {
     setPage(pageNumber);
   };
 
+  /**
+   * Handles filter clicks to filter cocktails based on selected filters
+   * @param {string} filter - The filter to apply to cocktails
+   */
   const handleFilterClick = (filter) => {
     if (filter === "Your Creations") {
       if (yourCreationsFilterActive) {
@@ -125,9 +149,6 @@ function Recipes() {
         setalcoholSideImage(PersonalBottle);
       }
 
-      setFilteredItemCount(userCreatedCocktails.length);
-
-      const newCocktailsPerPage = Math.ceil(filteredItemCount / 9);
     } else if (filter === "All Creations") {
       if (selectedFilter === "All Creations") {
         setSelectedFilter(null);
@@ -141,7 +162,6 @@ function Recipes() {
           .get("http://localhost:3001/allusercreatedcocktails")
           .then((resp) => {
             setFilteredCocktails(resp.data);
-            setFilteredItemCount(resp.data.length);
             setPage(1);
           })
           .catch((err) => {
@@ -195,9 +215,6 @@ function Recipes() {
           alcoholTypeId = 0;
           setalcoholSideImage(EmptyBottle);
       }
-
-      const newCocktailsPerPage = Math.ceil(filteredItemCount / 9);
-
       setActiveFilters((prevFilters) =>
         prevFilters.includes(filter)
           ? prevFilters.filter((f) => f !== filter)
@@ -221,10 +238,18 @@ function Recipes() {
     }
   };
 
+  /**
+   * Handles the click event for a cocktail image, navigating to the cocktail detail page
+   * @param {number} cocktailId - The ID of the clicked cocktail
+   */
   const handleImageClick = (cocktailId) => {
     navigate(`/recipedetailpage/${cocktailId}`);
   };
 
+  /**
+   * Handles the click event for a usercreated cocktail image, navigating to the usercreated cocktail detail page
+   * @param {number} userCocktailID - The ID of the clicked usercreated cocktail
+   */
   const handleUserImageClick = (userCocktailID) => {
     navigate(`/usercreatedcocktaildetailpage/${userCocktailID}`);
   };
@@ -233,9 +258,7 @@ function Recipes() {
     <>
       <NavbarComponent />
       <main>
-        <Container fluid style={{ padding: 0 }} className="mb-4">
-          <div className="image-with-text-container"></div>
-        </Container>
+        <Container fluid className="image-with-text-container mb-4"></Container>
         <Container className="mt-4">
           <Row>
             <Col md={2}>
@@ -291,6 +314,7 @@ function Recipes() {
                         placeholder="All Categories"
                         value={searchFilter}
                         onChange={handleSearchChange}
+                        className="w-100"
                       />
                     </Form.Group>
                   </Form>
@@ -300,6 +324,8 @@ function Recipes() {
                     variant="primary"
                     type="button"
                     onClick={handleSearchClick}
+                    id="searchButton"
+                    className="w-100"
                   >
                     Search
                   </Button>
@@ -332,7 +358,7 @@ function Recipes() {
                       />
                     ))}
               </Row>
-              <Pagination className="mt-4 justify-content-center">
+              <Pagination className="pagination justify-content-center mt-4">
                 {Array.from(
                   {
                     length: Math.ceil(cocktailData.length / cocktailsPerPage),
