@@ -2,10 +2,10 @@ const mysql = require('mysql2');
 require('dotenv').config();
 
 const db_connection = mysql.createConnection({
-    host: "nightin.mysql.database.azure.com",
-    user: "ishkhan",
-    password: "PlatinuM19941!",
-    database: "nightin"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 });
 
 module.exports = db_connection;

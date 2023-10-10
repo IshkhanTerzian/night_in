@@ -5,7 +5,7 @@ const conn = require("./db");
 const bodyParser = require("body-parser");
 const dontenv = require("dotenv").config();
 
-const DB_PORT = 3306;
+const DB_PORT = process.env.DB_PORT;
 
 app.use(
   cors({
