@@ -31,13 +31,13 @@ function handleLogin(req, res) {
   const sql = "SELECT * FROM users WHERE Username = ? AND Password = ?";
   conn.query(sql, [username, password], function (err, result) {
     if (err) {
-      res.status(500).json({ error: "Login failed" });
+      console.error("Database error:", err);
+      res.status(500).json({ error: "Internal server error" });
     } else if (result.length === 1) {
       const loggedInUser = result[0];
-
       res.json({ message: "Login successful", user: loggedInUser });
     } else {
-      res.status(401).json({ error: "User not found" });
+      res.status(401).json({ error: "Invalid credentials" });
     }
   });
 }
