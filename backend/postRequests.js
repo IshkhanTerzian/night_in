@@ -28,7 +28,7 @@ function handleRegistration(req, res) {
 function handleLogin(req, res) {
   const { username, password } = req.body;
 
-  const sql = "SELECT UserName, Password FROM users WHERE Username = ? AND Password = ?";
+  const sql = "SELECT * FROM users WHERE Username = ? AND Password = ?";
   conn.query(sql, [username, password], function (err, result) {
     if (err) {
       res.status(500).json({ error: "Login failed" });
