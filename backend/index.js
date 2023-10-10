@@ -16,6 +16,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 const {
+  handleLogin,
   handleRegistration,
   creatingNewUserCocktail,
   creatingBaseCocktail,
@@ -32,7 +33,6 @@ const {
 } = require("./postRequests");
 
 const {
-  handleLogin,
   getRecipes,
   getBaseDetailedRecipe,
   getAllUserCreatedCocktails,
@@ -59,6 +59,7 @@ const {
 } = require("./deleteRequests");
 
 // ALL POSTS HERE
+app.post("/login", handleLogin);
 app.post("/register", handleRegistration);
 app.post("/usercreatingcocktail/:userId", creatingNewUserCocktail);
 app.post("/admincreatingcocktail", creatingBaseCocktail);
@@ -83,7 +84,6 @@ app.post("/updateMainThreadPost/:forumpostId", updateMainThreadPost);
 app.post("/updatethreadpost/:threadID", updateThreadPost);
 
 // ALL GETTERS HERE
-app.get("/login", handleLogin);
 app.get("/recipes", getRecipes);
 app.get("/recipedetailpage/:cocktailId", getBaseDetailedRecipe);
 app.get("/allusercreatedcocktails", getAllUserCreatedCocktails);
