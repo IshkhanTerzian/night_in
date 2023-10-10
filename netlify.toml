@@ -2,11 +2,9 @@
   command = "npm run build"
   publish = "build/"
 
-[context.production]
-  environment = {
-    DB_HOST = "nightin.mysql.database.azure.com",
-    DB_USER = "ishkhan",
-    DB_PASSWORD = "PlatinuM19941!",
-    DB_DATABASE = "nightin",
-    DB_PORT = 3306
-  }
+[context.production.environment]
+  DB_HOST = "nightin.mysql.database.azure.com"
+  DB_USER = "ishkhan"
+  DB_PASSWORD = "PlatinuM19941!"
+  DB_DATABASE = "nightin"
+  DB_PORT = 3306
