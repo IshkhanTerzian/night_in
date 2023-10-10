@@ -12,7 +12,7 @@ function handleLogin(req, res) {
   const { username, password } = req.body;
 
   const sql = "SELECT Username, Password, UserType FROM users WHERE Username = ? AND Password = ?";
-  conn.query(sql, [username, password, userType], function (err, result) {
+  conn.query(sql, [username, password], function (err, result) {
     if (err) {
       res.status(500).json({ error: "Login failed" });
     } else if (result.length === 1) {

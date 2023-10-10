@@ -38,6 +38,7 @@ const Login = () => {
         console.log("Response from server:", response);
   
         const loggedInUser = response.data.user;
+        console.log(loggedInUser);
         login(loggedInUser.UserName, loggedInUser.UserId);
         localStorage.setItem("username", loggedInUser.UserName);
         localStorage.setItem("userId", loggedInUser.UserId);
