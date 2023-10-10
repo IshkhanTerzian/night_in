@@ -7,8 +7,11 @@ const dontenv = require("dotenv").config();
 
 const DB_PORT = process.env.DB_PORT;
 
-
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://night-in.xyz",
+  })
+);
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -55,9 +58,6 @@ const {
   removeSingleFormPost,
 } = require("./deleteRequests");
 
-
-
-
 // ALL POSTS HERE
 app.post("/register", handleRegistration);
 app.post("/login", handleLogin);
@@ -83,11 +83,6 @@ app.post(
 app.post("/updateMainThreadPost/:forumpostId", updateMainThreadPost);
 app.post("/updatethreadpost/:threadID", updateThreadPost);
 
-
-
-
-
-
 // ALL GETTERS HERE
 app.get("/recipes", getRecipes);
 app.get("/recipedetailpage/:cocktailId", getBaseDetailedRecipe);
@@ -108,12 +103,6 @@ app.get("/mostBaseCocktailSearched", getMostBaseCocktailSearched);
 app.get("/mostUserSearchedCocktails", getMostUserSearchedCocktails);
 app.get("/mostCommentedThread", getMostCommentedThread);
 app.get("/getSingleThreadPost/:threadID", getSingleThreadPost);
-
-
-
-
-
-
 
 // ALL DELETES HERE
 app.delete("/recipedetailpage/:cocktailId", deleteBaseCocktail);
