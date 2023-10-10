@@ -59,7 +59,7 @@ const {
 } = require("./deleteRequests");
 
 // ALL POSTS HERE
-app.post("/", handleLogin);
+app.get("/login", handleLogin);
 app.post("/register", handleRegistration);
 app.post("/usercreatingcocktail/:userId", creatingNewUserCocktail);
 app.post("/admincreatingcocktail", creatingBaseCocktail);

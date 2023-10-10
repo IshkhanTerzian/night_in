@@ -33,7 +33,7 @@ const Login = () => {
     console.log("Data to send:", { username, password });
   
     axios
-      .post("https://night-in.xyz/", { username, password })
+      .get("https://night-in.xyz/login", { username, password })
       .then((response) => {
         console.log("Response from server:", response);
   
