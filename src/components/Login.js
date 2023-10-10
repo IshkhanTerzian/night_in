@@ -30,7 +30,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/login", { username, password })
+      .post("https://nightin.mysql.database.azure.com/login", { username, password })
       .then((response) => {
         const loggedInUser = response.data.user;
         login(loggedInUser.UserName, loggedInUser.UserId);
