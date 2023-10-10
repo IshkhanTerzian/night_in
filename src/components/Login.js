@@ -32,6 +32,7 @@ const Login = () => {
     axios
       .post("https://night-in.xyz/login", { username, password })
       .then((response) => {
+        console.log(response);
         const loggedInUser = response.data.user;
         login(loggedInUser.UserName, loggedInUser.UserId);
         localStorage.setItem("username", loggedInUser.UserName);
