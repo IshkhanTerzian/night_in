@@ -60,7 +60,7 @@ const {
 
 // ALL POSTS HERE
 app.post("/register", handleRegistration);
-app.post("/login", handleLogin);
+app.post("https://night-in.xyz/login", handleLogin);
 app.post("/usercreatingcocktail/:userId", creatingNewUserCocktail);
 app.post("/admincreatingcocktail", creatingBaseCocktail);
 app.post("/creatingforumpostpage", createForumPosts);
