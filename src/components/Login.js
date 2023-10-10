@@ -29,10 +29,14 @@ const Login = () => {
    */
   const handleLogin = (e) => {
     e.preventDefault();
+  
+    console.log("Data to send:", { username, password });
+  
     axios
       .post("https://night-in.xyz/login", { username, password })
       .then((response) => {
-        console.log(response);
+        console.log("Response from server:", response);
+  
         const loggedInUser = response.data.user;
         login(loggedInUser.UserName, loggedInUser.UserId);
         localStorage.setItem("username", loggedInUser.UserName);
