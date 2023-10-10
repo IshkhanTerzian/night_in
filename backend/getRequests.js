@@ -1,30 +1,5 @@
 const conn = require("./db");
 
-
-
-/**
- * Finds if the account exists to attempt login
- *
- * @param {*} req - The HTTP request object
- * @param {*} res - The HTTP response object
- */
-function handleLogin(req, res) {
-  const { username, password } = req.body;
-
-  const sql = "SELECT Username, Password, UserType FROM users WHERE Username = ? AND Password = ?";
-  conn.query(sql, [username, password], function (err, result) {
-    if (err) {
-      res.status(500).json({ error: "Login failed" });
-    } else if (result.length === 1) {
-      const loggedInUser = result[0];
-
-      res.json({ message: "Login successful", user: loggedInUser });
-    } else {
-      res.status(401).json({ error: "User not found" });
-    }
-  });
-}
-
 /**
  * Retrieves all the recipes from the database
  *
@@ -435,8 +410,6 @@ function getMostCommentedThread(req, res) {
 }
 
 module.exports = {
-
-  handleLogin,
   getRecipes,
   getBaseDetailedRecipe,
   getAllUserCreatedCocktails,
