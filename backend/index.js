@@ -17,7 +17,6 @@ app.use(bodyParser.json());
 
 const {
   handleRegistration,
-  handleLogin,
   creatingNewUserCocktail,
   creatingBaseCocktail,
   createForumPosts,
@@ -33,6 +32,7 @@ const {
 } = require("./postRequests");
 
 const {
+  handleLogin,
   getRecipes,
   getBaseDetailedRecipe,
   getAllUserCreatedCocktails,
@@ -60,7 +60,6 @@ const {
 
 // ALL POSTS HERE
 app.post("/register", handleRegistration);
-app.post("https://night-in.xyz/login", handleLogin);
 app.post("/usercreatingcocktail/:userId", creatingNewUserCocktail);
 app.post("/admincreatingcocktail", creatingBaseCocktail);
 app.post("/creatingforumpostpage", createForumPosts);
@@ -84,6 +83,7 @@ app.post("/updateMainThreadPost/:forumpostId", updateMainThreadPost);
 app.post("/updatethreadpost/:threadID", updateThreadPost);
 
 // ALL GETTERS HERE
+app.get("/login", handleLogin);
 app.get("/recipes", getRecipes);
 app.get("/recipedetailpage/:cocktailId", getBaseDetailedRecipe);
 app.get("/allusercreatedcocktails", getAllUserCreatedCocktails);

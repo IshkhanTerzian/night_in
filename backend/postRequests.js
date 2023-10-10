@@ -20,29 +20,6 @@ function handleRegistration(req, res) {
 }
 
 /**
- * Finds if the account exists to attempt login
- *
- * @param {*} req - The HTTP request object
- * @param {*} res - The HTTP response object
- */
-function handleLogin(req, res) {
-  const { username, password, userType } = req.body;
-
-  const sql = "SELECT * FROM users WHERE Username = ? AND Password = ?";
-  conn.query(sql, [username, password, userType], function (err, result) {
-    if (err) {
-      res.status(500).json({ error: "Login failed" });
-    } else if (result.length === 1) {
-      const loggedInUser = result[0];
-
-      res.json({ message: "Login successful", user: loggedInUser });
-    } else {
-      res.status(401).json({ error: "User not found" });
-    }
-  });
-}
-
-/**
  * Creates a new user cocktail
  *
  * @param {*} req - The HTTP request object
@@ -480,7 +457,6 @@ function updateThreadPost(req, res) {
 
 module.exports = {
   handleRegistration,
-  handleLogin,
   creatingNewUserCocktail,
   creatingBaseCocktail,
   createForumPosts,
