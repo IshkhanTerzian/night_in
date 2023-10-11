@@ -3,12 +3,12 @@
   command = "npm run build"
 
 [context.production.environment]
-  DB_HOST = "##"
-  DB_USER = "##"
-  DB_PASSWORD = "##"
-  DB_DATABASE = "##"
-  DB_PORT = "##"
-  DB_CA = "##"
+  DB_HOST = "nightin.mysql.database.azure.com"
+  DB_USER = "ishkhan"
+  DB_PASSWORD = "PlatinuM19941!"
+  DB_DATABASE = "nightin"
+  DB_PORT = "3306"
+  DB_CA = "./backend/DigiCertGlobalRootCA.crt.pem"
 
 [[headers]]
   for = "/*"
