@@ -7,11 +7,7 @@ const dontenv = require("dotenv").config();
 
 const DB_PORT = process.env.DB_PORT || 3306;
 
-app.use(
-  cors({
-    origin: "https://night-in.xyz",
-  })
-);
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
