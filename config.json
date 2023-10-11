@@ -1,8 +1,0 @@
-{
-    "host": "nightin.mysql.database.azure.com",
-    "user": "ishkhan",
-    "password": "PlatinuM19941!",
-    "database": "nightin",
-    "port": 3306, 
-    "ssl": true 
-}
