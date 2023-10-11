@@ -8,9 +8,6 @@ const db_connection = mysql.createConnection({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT,
-    ssl: {
-        ca: fs.readFileSync(process.env.DB_CA)
-    }
 });
 
 module.exports = db_connection;
