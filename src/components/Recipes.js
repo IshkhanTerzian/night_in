@@ -22,9 +22,13 @@ import {
 import EmptyBottle from "../assets/empty.png";
 import WhiskeyBottle from "../assets/whiskeybottle.jpg";
 import VodkaBottle from "../assets/vodka.png";
+// eslint-disable-next-line 
 import BrandyBottle from "../assets/brandy.png";
+// eslint-disable-next-line 
 import GinBottle from "../assets/gin.png";
+// eslint-disable-next-line 
 import RumBottle from "../assets/rum.png";
+// eslint-disable-next-line 
 import TequilaBottle from "../assets/tequila.png";
 import PersonalBottle from "../assets/personal.png";
 import AllCocktails from "../assets/allcocktails.png";
@@ -176,40 +180,28 @@ function Recipes() {
 
       switch (filter) {
         case "Vodka":
+          alcoholTypeId = 1;
+          setalcoholSideImage(VodkaBottle);
+          break;
         case "Sweet":
+          alcoholTypeId = 1;
+          setalcoholSideImage(VodkaBottle);
+          break;
         case "Dinner":
           alcoholTypeId = 1;
           setalcoholSideImage(VodkaBottle);
           break;
         case "Whiskey":
-        case "Savoury":
-        case "Lunch":
           alcoholTypeId = 2;
           setalcoholSideImage(WhiskeyBottle);
           break;
-        case "Brandy":
-        case "Smokey":
-        case "Dinner":
-          alcoholTypeId = 3;
-          setalcoholSideImage(BrandyBottle);
-          break;
-        case "Gin":
-        case "Sour":
-        case "Lunch":
-          alcoholTypeId = 4;
-          setalcoholSideImage(GinBottle);
-          break;
-        case "Rum":
-        case "Spicy":
-        case "Brunch":
-          alcoholTypeId = 5;
-          setalcoholSideImage(RumBottle);
-          break;
-        case "Tequila":
         case "Savoury":
-        case "Brunch":
-          alcoholTypeId = 6;
-          setalcoholSideImage(TequilaBottle);
+          alcoholTypeId = 2;
+          setalcoholSideImage(WhiskeyBottle);
+          break;
+        case "Lunch":
+          alcoholTypeId = 2;
+          setalcoholSideImage(WhiskeyBottle);
           break;
         default:
           alcoholTypeId = 0;

@@ -134,7 +134,7 @@ const UpdatingUserCreatedCocktail = () => {
               {imageFile ? (
                 <img
                   src={URL.createObjectURL(imageFile)}
-                  alt="Selected Image"
+                  alt="Enter a file"
                   className="img-fluid"
                 />
               ) : (

@@ -207,15 +207,14 @@ function Forum() {
             {forumPosts.map((post) => (
               <tr key={`${post.id}-${post.CreationDate}`}>
                 <td className="col-4">
-                  <a
-                    href="#"
+                  <button
                     onClick={(e) => {
                       e.preventDefault();
                       handleTitleClick(post.ForumPostID);
                     }}
                   >
                     <h5>{post.TopicTitle}</h5>
-                  </a>
+                  </button>
                   <p>{post.Description}</p>
                 </td>
                 <td className="col-4 text-center">

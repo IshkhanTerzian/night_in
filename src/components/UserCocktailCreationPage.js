@@ -101,7 +101,8 @@ const UserCocktailCreationPage = () => {
         Instructions: instructions,
         CocktailImage: imageBase64,
       };
-
+      
+      // eslint-disable-next-line
       const response = await axios.post(
         `http://localhost:3001/usercreatingcocktail/${userId}`,
         requestData,
@@ -150,7 +151,7 @@ const UserCocktailCreationPage = () => {
               {imageFile ? (
                 <img
                   src={URL.createObjectURL(imageFile)}
-                  alt="Selected Image"
+                  alt="Enter a file"
                   className="img-fluid"
                 />
               ) : (

@@ -13,6 +13,7 @@ function UpdateMainThreadPost() {
   const { forumpostId } = useParams();
 
   // Variable that holds the data coming back from the DB for the specified thread
+  // eslint-disable-next-line
   const [data, setData] = useState(null);
 
   // Variable that holds the edited title of the thread
