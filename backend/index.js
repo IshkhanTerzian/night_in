@@ -6,7 +6,7 @@ const conn = require("./db");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
 
-const DB_PORT = process.env.DB_PORT;
+const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
@@ -110,8 +110,8 @@ app.delete(
 app.delete("/removeforumpost/:forumPostID", removeForumPost);
 app.delete("/removeaddedpost/:threadID", removeSingleFormPost);
 
-app.listen(DB_PORT, function () {
-  console.log(`App listening on port ${DB_PORT}`);
+app.listen(PORT, function () {
+  console.log(`App listening on port ${PORT}`);
   conn.connect(function (err) {
     if (err) {
       console.log(err.message);

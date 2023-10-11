@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`${config.url}/register`, {
+      await axios.post(`http://localhost:3001/register`, {
         username: formData.username,
         email: formData.email,
         password: formData.password,
