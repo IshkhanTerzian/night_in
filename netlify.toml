@@ -1,0 +1,20 @@
+[build]
+  publish = "build" 
+  command = "npm run build" 
+
+[context.production.environment]
+DB_HOST = "nightin.mysql.database.azure.com"
+DB_USER = "ishkhan"
+DB_PASSWORD = "PlatinuM19941!"
+DB_DATABASE = "nightin"
+DB_PORT = 3306
+DB_CA = "./backend/DigiCertGlobalRootCA.crt.pem"
+
+[headers]
+  "/*"
+    Access-Control-Allow-Origin = "*" 
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
