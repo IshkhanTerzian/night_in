@@ -1,0 +1,8 @@
+{
+    "host": "https://salmon-bush-07630f710.3.azurestaticapps.net",
+    "user": "ishkhan",
+    "password": "PlatinuM19941!",
+    "database": "nightin",
+    "port": 3306, 
+    "ssl": true 
+}
