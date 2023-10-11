@@ -1,13 +1,15 @@
 const express = require("express");
-const cors = require("cors");
+const path = require('path');
+//const cors = require("cors");
 const app = express();
 const conn = require("./db");
 const bodyParser = require("body-parser");
-const dontenv = require("dotenv").config();
+const dotenv = require("dotenv").config();
 
 const DB_PORT = process.env.DB_PORT || 3306;
 
-app.use(cors());
+app.use(express.static(path.join(__dirname, '../build')));
+//app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
