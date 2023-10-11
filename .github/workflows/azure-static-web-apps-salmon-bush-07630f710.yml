@@ -23,6 +23,9 @@ jobs:
       - name: Set CI Environment Variable
         run: echo "CI=false" >> $GITHUB_ENV
 
+      - name: Create build directory
+        run: mkdir $GITHUB_WORKSPACE/build
+
       - name: Copy config.json
         run: cp config.json $GITHUB_WORKSPACE/build/config.json
 
@@ -47,6 +50,9 @@ jobs:
     steps:
       - name: Set CI Environment Variable
         run: echo "CI=false" >> $GITHUB_ENV
+
+      - name: Create build directory
+        run: mkdir $GITHUB_WORKSPACE/build
 
       - name: Copy config.json
         run: cp config.json $GITHUB_WORKSPACE/build/config.json
