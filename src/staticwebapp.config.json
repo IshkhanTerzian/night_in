@@ -1,0 +1,8 @@
+{
+    "build": {
+      "outputPath": "build",
+      "publish": "public",
+      "CI": "false"
+    }
+  }
+  
