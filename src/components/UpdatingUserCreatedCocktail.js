@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
 import NavbarComponent from "./NavbarComponent";
-import "../styles/UpdatingUserCreatedCocktail.css"; // Import your external CSS file here
+import "../styles/UpdatingUserCreatedCocktail.css"; 
 
 const UpdatingUserCreatedCocktail = () => {
   const navigate = useNavigate();

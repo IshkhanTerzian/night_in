@@ -78,6 +78,7 @@ const UpdatingBaseCocktail = () => {
         }
       );
 
+
       navigate(`/recipedetailpage/${cocktailId}`);
     } catch (error) {
       console.error("Error updating cocktail:", error);
