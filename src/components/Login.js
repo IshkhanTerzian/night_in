@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
+import config from ".../config.json";
 
 import "../styles/Login.css";
 import Footer from "./Footer";
@@ -33,7 +34,7 @@ const Login = () => {
     console.log("Data to send:", { username, password });
   
     axios
-      .post("http://localhost:3001", { username, password })
+      .post(config.url, { username, password })
       .then((response) => {
         console.log("Response from server:", response.data);
   
