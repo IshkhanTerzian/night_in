@@ -71,6 +71,7 @@ async function handleRegistration(context, req)  {
 
 
 
+
 /**
  * Finds if the account exists to attempt login
  *
