@@ -1,74 +1,23 @@
 const conn = require("./db");
-const { app } = require('@azure/functions');
-const { ConnectionPool, Request } = require('mssql');
 
+/**
+ * Inserts a new user into the database
+ *
+ * @param {*} req - The HTTP request object
+ * @param {*} res - The HTTP response object
+ */
+function handleRegistration(req, res) {
+  const { username, email, password } = req.body;
 
-// /**
-//  * Inserts a new user into the database
-//  *
-//  * @param {*} req - The HTTP request object
-//  * @param {*} res - The HTTP response object
-//  */
-// function handleRegistration(req, res) {
-//   const { username, email, password } = req.body;
-
-//   const sql = "INSERT INTO users (Username, Email, Password) VALUES (?, ?, ?)";
-//   conn.query(sql, [username, email, password], function (err, result) {
-//     if (err) {
-//       res.status(500).json({ error: "Registration failed" });
-//     } else {
-//       res.json({ message: "Registration successful" });
-//     }
-//   });
-// }
-
-
-async function handleRegistration(context, req)  {
-  context.log('HTTP function processed a request.');
-
-  const config = {
-      user: 'ishkhan',
-      password: 'PlatinuM19941!',
-      server: 'nightinserver.database.windows.net',
-      database: 'nightin',
-      options: {
-          encrypt: true, // Set to true if you are using a secure connection
-      },
-  };
-
-  const connection = new ConnectionPool(config);
-
-  try {
-      await connection.connect();
-
-      const { username, password, email } = req.body; // Use req.body to get user data
-
-      const sql = `
-          INSERT INTO users (UserName, Password, Email)
-          VALUES (@username, @password, @email);
-      `;
-
-      const dbRequest = new Request(connection);
-      dbRequest.input('UserName', username);
-      dbRequest.input('Password', password);
-      dbRequest.input('Email', email);
-
-      const result = await dbRequest.query(sql);
-
-      context.res = {
-          status: 200,
-          body: { message: "User added successfully" },
-      };
-  } catch (err) {
-      context.res = {
-          status: 500,
-          body: { error: "Failed to add user" },
-      };
-  } finally {
-      await connection.close();
-  }
+  const sql = "INSERT INTO users (Username, Email, Password) VALUES (?, ?, ?)";
+  conn.query(sql, [username, email, password], function (err, result) {
+    if (err) {
+      res.status(500).json({ error: "Registration failed" });
+    } else {
+      res.json({ message: "Registration successful" });
+    }
+  });
 }
-
 
 
 
