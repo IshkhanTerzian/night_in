@@ -33,7 +33,7 @@ const Login = () => {
     console.log("Data to send:", { username, password });
   
     axios
-      .post("https://localhost:3001/", { username, password })
+      .post("http://localhost:3001", { username, password })
       .then((response) => {
         console.log("Response from server:", response.data);
   

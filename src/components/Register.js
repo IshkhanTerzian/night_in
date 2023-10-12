@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`http://localhost:3001/register`, {
+      await axios.post(`https://nightin-functions.azurewebsites.net/api/handleRegistration?code=IZ-aoN9g7emXVB5feKLvzWqgI6leawqc_RzZfWULTHyOAzFupIULkA==/register`, {
         username: formData.username,
         email: formData.email,
         password: formData.password,
