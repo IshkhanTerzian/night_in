@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import axios from "axios";
-// eslint-disable-next-line 
-import config from "../config.json";
+//import axios from "axios";
+//import config from "../config.json";
 
 const Register = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   // Variable that holds the form data object
   const [formData, setFormData] = useState({
