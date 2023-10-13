@@ -24,7 +24,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`https://v2gxj1smjg.execute-api.us-east-1.amazonaws.com/dev/register`, {
+      await axios.post(`https://4tbx3lq7kzrk6lm3edovpvgr3u0banhs.lambda-url.us-east-1.on.aws/register`, {
         username: formData.username,
         email: formData.email,
         password: formData.password,
