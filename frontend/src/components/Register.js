@@ -16,24 +16,42 @@ const Register = () => {
     confirmPassword: "",
   });
 
-  /**
-   * Handles the register process
-   * @param {Event} e The form submission event
-   */
-  const handleRegister = async (e) => {
-    e.preventDefault();
+/**
+ * Handles the register process
+ * @param {Event} e The form submission event
+ */
+const handleRegister = (e) => {
+  e.preventDefault();
 
-    try {
-      await axios.post(`https://4tbx3lq7kzrk6lm3edovpvgr3u0banhs.lambda-url.us-east-1.on.aws/register`, {
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-      });
-      navigate("/successfulregistration");
-    } catch (error) {
-      console.error("Registration failed:", error.response.data.error);
+  const xhr = new XMLHttpRequest();
+  const url = "https://4tbx3lq7kzrk6lm3edovpvgr3u0banhs.lambda-url.us-east-1.on.aws/register"; // The Lambda endpoint
+
+  xhr.open("POST", url);
+  xhr.setRequestHeader("Content-Type", "application/json"); // Set the Content-Type header
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        // Handle the success response here
+        const response = JSON.parse(xhr.responseText);
+        console.log("Registration successful:", response.message);
+      } else {
+        // Handle the error response here
+        const errorResponse = JSON.parse(xhr.responseText);
+        console.error("Registration failed:", errorResponse.error);
+      }
     }
   };
+
+  // Prepare the request body
+  const requestBody = JSON.stringify({
+    username: formData.username,
+    email: formData.email,
+    password: formData.password,
+  });
+
+  xhr.send(requestBody);
+};
+
 
   return (
     <>
