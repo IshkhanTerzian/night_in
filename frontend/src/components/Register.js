@@ -22,7 +22,7 @@ const Register = () => {
    */
   const handleRegister = async (e) => {
     e.preventDefault();
-
+  
     try {
       await axios.post(
         `https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/register`,
@@ -33,8 +33,7 @@ const Register = () => {
         },
         {
           headers: {
-            'Content-Type': 'application/json', // Set the content type to JSON
-            'Origin': 'https://night-in.xyz', // Replace with your actual frontend origin
+            'Content-Type': 'application/json', 
           },
         }
       );
