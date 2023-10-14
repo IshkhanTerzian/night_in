@@ -24,11 +24,20 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/register`, {
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-      });
+      await axios.post(
+        `https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/register`,
+        {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json', // Set the content type to JSON
+            'Origin': 'https://night-in.xyz', // Replace with your actual frontend origin
+          },
+        }
+      );
       navigate("/successfulregistration");
     } catch (error) {
       console.error("Registration failed:", error.response.data.error);
