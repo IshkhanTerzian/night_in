@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-//import axios from "axios";
-//import config from "../config.json";
+import axios from "axios";
+// eslint-disable-next-line 
+import config from "../config.json";
 
 const Register = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // Variable that holds the form data object
   const [formData, setFormData] = useState({
@@ -15,40 +16,24 @@ const Register = () => {
     confirmPassword: "",
   });
 
-/**
- * Handles the register process
- * @param {Event} e The form submission event
- */
-const handleRegister = (e) => {
-  e.preventDefault();
+  /**
+   * Handles the register process
+   * @param {Event} e The form submission event
+   */
+  const handleRegister = async (e) => {
+    e.preventDefault();
 
-  const xhr = new XMLHttpRequest();
-  const url = "https://4tbx3lq7kzrk6lm3edovpvgr3u0banhs.lambda-url.us-east-1.on.aws/register"; 
-
-  xhr.open("POST", url);
-  xhr.setRequestHeader("Content-Type", "application/json"); 
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        console.log("Registration successful:", response.message);
-      } else {
-        const errorResponse = JSON.parse(xhr.responseText);
-        console.error("Registration failed:", errorResponse.error);
-      }
+    try {
+      await axios.post(`https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/register`, {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+      });
+      navigate("/successfulregistration");
+    } catch (error) {
+      console.error("Registration failed:", error.response.data.error);
     }
   };
-
-  
-  const requestBody = JSON.stringify({
-    username: formData.username,
-    email: formData.email,
-    password: formData.password,
-  });
-
-  xhr.send(requestBody);
-};
-
 
   return (
     <>
