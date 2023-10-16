@@ -23,6 +23,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
   
+    
     try {
       await axios.post(
         `${config.AWS_URL}/Prod/register`,
