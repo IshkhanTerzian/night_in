@@ -18,8 +18,7 @@ function LandingPage() {
     axios
       .get("https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/recipes")
       .then((response) => {
-        console.log("RECIPE RESPONSE: " + response);
-        console.log("RESPONSE DATA FROM RECIPES: " + response.data);
+        console.log("RESPONSE DATA FROM RECIPES: " + response.data.data.dbData);
         setCocktailData(response.data.data.dbData);
       })
       .catch((err) => {

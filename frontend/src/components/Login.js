@@ -45,21 +45,17 @@ const Login = () => {
       );
 
       const userInfo = response.data.data[0];
-      console.log(userInfo[0]);
-
+      const user = userInfo[0];
       
-
-      const loggedInUser = userInfo.UserName;
-
-
+      const loggedInUser = user.UserName;
       console.log("username = " +  loggedInUser);
-      console.log("userId = " +  userInfo.UserId);
-      console.log("userType = " +  userInfo.UserType);
+      console.log("userId = " +  user.UserId);
+      console.log("userType = " +  user.UserType);
 
-      login(loggedInUser, userInfo.UserId);
+      login(loggedInUser, user.UserId);
       localStorage.setItem("username", loggedInUser);
-      localStorage.setItem("userId", userInfo.UserId);
-      localStorage.setItem("userType", userInfo.UserType);
+      localStorage.setItem("userId", user.UserId);
+      localStorage.setItem("userType", user.UserType);
       
 
       navigate("/landingpage");
