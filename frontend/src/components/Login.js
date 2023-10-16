@@ -44,8 +44,7 @@ const Login = () => {
         }
       );
 
-      const userInfo = response.data.data;
-      console.log("RESPONSE DATA: " + response.data);
+      const userInfo = response.data.data[0];
       console.log(userInfo);
 
       
