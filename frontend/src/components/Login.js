@@ -27,25 +27,34 @@ const Login = () => {
    * upon successful login stores user data in local storage.
    * @param {Event} e - The form submission event
    */
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
   
-    
-    axios
-      .post("https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/", { username, password })
-      .then((response) => {
+    try {
+      const response = await axios.post(
+        `https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/`,
+        {
+          username,
+          password
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
   
-        const loggedInUser = response.data.user;
-        login(loggedInUser.UserName, loggedInUser.UserId);
-        localStorage.setItem("username", loggedInUser.UserName);
-        localStorage.setItem("userId", loggedInUser.UserId);
-        localStorage.setItem("userType", loggedInUser.UserType);
-        navigate("/landingpage");
-      })
-      .catch((error) => {
-        setErrorMessage("Login failed. Please check your credentials.");
-      });
+      const loggedInUser = response.data.user;
+      login(loggedInUser.UserName, loggedInUser.UserId);
+      localStorage.setItem("username", loggedInUser.UserName);
+      localStorage.setItem("userId", loggedInUser.UserId);
+      localStorage.setItem("userType", loggedInUser.UserType);
+      navigate("/landingpage");
+    } catch (error) {
+      setErrorMessage("Login failed. Please check your credentials.");
+    }
   };
+  
 
   /**
    * Navigates to the registration page when the button is clicked
