@@ -29,36 +29,33 @@ const Login = () => {
    */
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("USERNAME BEING PASSED " + username);
-    console.log("password BEING PASSED " + password);
 
     try {
       const response = await axios.post(
         `https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/`,
         {
           username,
-          password
+          password,
         },
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
-        console.log(response);
-        console.log(response.data);
 
-      // const loggedInUser = response.data.user;
-      // login(loggedInUser.UserName, loggedInUser.UserId);
-      // localStorage.setItem("username", loggedInUser.UserName);
-      // localStorage.setItem("userId", loggedInUser.UserId);
-      // localStorage.setItem("userType", loggedInUser.UserType);
-      // navigate("/landingpage");
+      const userInfo = response.data.data;
+
+      const loggedInUser = userInfo.UserName;
+      login(loggedInUser, userInfo.UserId);
+      localStorage.setItem("username", loggedInUser);
+      localStorage.setItem("userId", userInfo.UserId);
+      localStorage.setItem("userType", userInfo.UserType);
+      navigate("/landingpage");
     } catch (error) {
       setErrorMessage("Login failed. Please check your credentials.");
     }
   };
-  
 
   /**
    * Navigates to the registration page when the button is clicked
