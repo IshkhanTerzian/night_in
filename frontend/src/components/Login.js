@@ -30,15 +30,12 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
   
-    console.log("Data to send:", { username, password });
-  
+    
     axios
-      .post("http://localhost:3001", { username, password })
+      .post("https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/", { username, password })
       .then((response) => {
-        console.log("Response from server:", response.data);
   
         const loggedInUser = response.data.user;
-        console.log(loggedInUser);
         login(loggedInUser.UserName, loggedInUser.UserId);
         localStorage.setItem("username", loggedInUser.UserName);
         localStorage.setItem("userId", loggedInUser.UserId);
@@ -46,7 +43,6 @@ const Login = () => {
         navigate("/landingpage");
       })
       .catch((error) => {
-        console.error(error.response.data.error);
         setErrorMessage("Login failed. Please check your credentials.");
       });
   };
