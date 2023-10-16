@@ -165,7 +165,7 @@ function Recipes() {
 
         try {
           axios
-            .get(`${config.AWS_URL}}/allusercreatedcocktails`)
+            .get(`${config.AWS_URL}/allusercreatedcocktails`)
             .then((response) => {
               console.log(response.data.data);
               setFilteredCocktails(response.data.data);
