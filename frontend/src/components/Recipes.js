@@ -92,7 +92,7 @@ function Recipes() {
           setCocktailData(response.data.data);
         })
         .catch((err) => {
-          console.err("Error fetching data:", err);
+          console.error("Error fetching data:", err);
         });
     } catch (err) {}
   }, []);
@@ -106,7 +106,7 @@ function Recipes() {
           setUserCreatedCocktails(response.data.data);
         })
         .catch((err) => {
-          console.err("Error fetching user-created cocktails:", err);
+          console.error("Error fetching user-created cocktails:", err);
         });
     }
   }, [loggedInUserId]);
@@ -171,7 +171,7 @@ function Recipes() {
             setPage(1);
           })
           .catch((err) => {
-            console.err("Error fetching all user-created cocktails:", err);
+            console.error("Error fetching all user-created cocktails:", err);
           });
 
         setalcoholSideImage(AllCocktails);
