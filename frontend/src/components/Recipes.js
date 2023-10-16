@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
 
-import config from '../config.json';
+import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
 import CocktailCard from "./CocktailCard";
 import UserCreatedCocktailCard from "./UserCreatedCocktailCard";
@@ -85,9 +85,7 @@ function Recipes() {
   useEffect(() => {
     try {
       axios
-        .get(
-          `${config.AWS_URL}/recipes`
-        )
+        .get(`${config.AWS_URL}/recipes`)
         .then((response) => {
           setCocktailData(response.data.data);
         })
@@ -98,17 +96,19 @@ function Recipes() {
   }, []);
 
   useEffect(() => {
-    if (loggedInUserId) {
-      axios
-        .get(`${config.AWS_URL}/usercreatedcocktails/${loggedInUserId}`)
-        .then((response) => {
-          console.log(response.data.data);
-          setUserCreatedCocktails(response.data.data);
-        })
-        .catch((err) => {
-          console.error("Error fetching user-created cocktails:", err);
-        });
-    }
+    try {
+      if (loggedInUserId) {
+        axios
+          .get(`${config.AWS_URL}/usercreatedcocktails/${loggedInUserId}`)
+          .then((response) => {
+            console.log(response.data.data);
+            setUserCreatedCocktails(response.data.data);
+          })
+          .catch((err) => {
+            console.error("Error fetching user-created cocktails:", err);
+          });
+      }
+    } catch (err) {}
   }, [loggedInUserId]);
 
   /**
@@ -163,16 +163,18 @@ function Recipes() {
       } else {
         setSelectedFilter(filter);
 
-        axios
-          .get(`${config.AWS_URL}}/allusercreatedcocktails`)
-          .then((resp) => {
-            console.log(resp.data.data);
-            setFilteredCocktails(resp.data.data);
-            setPage(1);
-          })
-          .catch((err) => {
-            console.error("Error fetching all user-created cocktails:", err);
-          });
+        try {
+          axios
+            .get(`${config.AWS_URL}}/allusercreatedcocktails`)
+            .then((response) => {
+              console.log(response.data.data);
+              setFilteredCocktails(response.data.data);
+              setPage(1);
+            })
+            .catch((err) => {
+              console.error("Error fetching all user-created cocktails:", err);
+            });
+        } catch (err) {}
 
         setalcoholSideImage(AllCocktails);
         setYourCreationsFilterActive(false);
