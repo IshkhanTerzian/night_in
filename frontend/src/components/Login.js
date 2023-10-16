@@ -46,6 +46,8 @@ const Login = () => {
         }
       );
         console.log(response);
+        console.log(response.data);
+
       // const loggedInUser = response.data.user;
       // login(loggedInUser.UserName, loggedInUser.UserId);
       // localStorage.setItem("username", loggedInUser.UserName);
