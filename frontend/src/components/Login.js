@@ -45,7 +45,8 @@ const Login = () => {
       );
 
       const userInfo = response.data.data;
-
+      console.log("RESPONSE DATA: " + response.data);
+      console.log(userInfo);
 
       
 
@@ -55,7 +56,7 @@ const Login = () => {
       console.log("username = " +  loggedInUser);
       console.log("userId = " +  userInfo.UserId);
       console.log("userType = " +  userInfo.UserType);
-      
+
       login(loggedInUser, userInfo.UserId);
       localStorage.setItem("username", loggedInUser);
       localStorage.setItem("userId", userInfo.UserId);
