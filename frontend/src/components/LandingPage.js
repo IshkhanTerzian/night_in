@@ -3,7 +3,8 @@ import { Container, Image, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import config from "../config.json";
+require('dotenv').config();
+
 import NavbarComponent from "./NavbarComponent";
 import CocktailCard from "./CocktailCard";
 import Footer from "./Footer";
@@ -17,7 +18,7 @@ function LandingPage() {
 
   useEffect(() => {
     axios
-      .get(`${config.AWS_URL}/recipes`)
+      .get(`${process.env.AWS_URL}/recipes`)
       .then((response) => {
         setCocktailData(response.data.data);
       })

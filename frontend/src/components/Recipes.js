@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
 
-import config from "../config.json";
+require('dotenv').config();
+
 import NavbarComponent from "./NavbarComponent";
 import CocktailCard from "./CocktailCard";
 import UserCreatedCocktailCard from "./UserCreatedCocktailCard";
@@ -85,7 +86,7 @@ function Recipes() {
   useEffect(() => {
     try {
       axios
-        .get(`${config.AWS_URL}/recipes`)
+        .get(`${process.env.AWS_URL}/recipes`)
         .then((response) => {
           setCocktailData(response.data.data);
         })
@@ -99,7 +100,7 @@ function Recipes() {
     try {
       if (loggedInUserId) {
         axios
-          .get(`${config.AWS_URL}/usercreatedcocktails/${loggedInUserId}`)
+          .get(`${process.env.AWS_URL}/usercreatedcocktails/${loggedInUserId}`)
           .then((response) => {
             console.log(response.data.data);
             setUserCreatedCocktails(response.data.data);
@@ -165,7 +166,7 @@ function Recipes() {
 
         try {
           axios
-            .get(`${config.AWS_URL}/allusercreatedcocktails`)
+            .get(`${process.env.AWS_URL}/allusercreatedcocktails`)
             .then((response) => {
               console.log(response.data.data);
               setFilteredCocktails(response.data.data);
