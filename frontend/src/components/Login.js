@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
 
-import config from "../../../config.json";
+import config from "../config.json";
 import "../styles/Login.css";
 import Footer from "./Footer";
 
