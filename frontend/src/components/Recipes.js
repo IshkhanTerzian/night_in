@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
 
-import config from "../config.json";
+import config from "../../../config.json";
 import NavbarComponent from "./NavbarComponent";
 import CocktailCard from "./CocktailCard";
 import UserCreatedCocktailCard from "./UserCreatedCocktailCard";
@@ -184,28 +184,40 @@ function Recipes() {
 
       switch (filter) {
         case "Vodka":
-          alcoholTypeId = 1;
-          setalcoholSideImage(VodkaBottle);
-          break;
         case "Sweet":
-          alcoholTypeId = 1;
-          setalcoholSideImage(VodkaBottle);
-          break;
         case "Dinner":
           alcoholTypeId = 1;
           setalcoholSideImage(VodkaBottle);
           break;
         case "Whiskey":
-          alcoholTypeId = 2;
-          setalcoholSideImage(WhiskeyBottle);
-          break;
         case "Savoury":
+        case "Lubch":
           alcoholTypeId = 2;
           setalcoholSideImage(WhiskeyBottle);
           break;
+        case "Brandy":
+        case "Smokey":
+        case "Dinner":
+          alcoholTypeId = 3;
+          setalcoholSideImage(BrandyBottle);
+          break;
+        case "Gin":
+        case "Sour":
         case "Lunch":
-          alcoholTypeId = 2;
-          setalcoholSideImage(WhiskeyBottle);
+          alcoholTypeId = 4;
+          setalcoholSideImage(GinBottle);
+          break;
+        case "Rum":
+        case "Spicy":
+        case "Brunch":
+          alcoholTypeId = 5;
+          setalcoholSideImage(RumBottle);
+          break;
+        case "Tequila":
+        case "Savoury":
+        case "Brunch":
+          alcoholTypeId = 6;
+          setalcoholSideImage(TequilaBottle);
           break;
         default:
           alcoholTypeId = 0;

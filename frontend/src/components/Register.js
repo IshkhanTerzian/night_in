@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import axios from "axios";
-import config from "../config.json";
+
+import config from "../../../config.json";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Register = () => {
   
     try {
       await axios.post(
-        `https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/register`,
+        `${config.AWS_URL}/Prod/register`,
         {
           username: formData.username,
           email: formData.email,

@@ -3,7 +3,7 @@ import { Container, Image, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import config from '../config.json';
+import config from "../../../config.json";
 import NavbarComponent from "./NavbarComponent";
 import CocktailCard from "./CocktailCard";
 import Footer from "./Footer";
