@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
 
+import config from '../config.json';
 import NavbarComponent from "./NavbarComponent";
 import CocktailCard from "./CocktailCard";
 import UserCreatedCocktailCard from "./UserCreatedCocktailCard";
@@ -85,10 +86,10 @@ function Recipes() {
     try {
       axios
         .get(
-          "https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/recipes"
+          `${config.AWS_URL}/recipes`
         )
         .then((response) => {
-          setCocktailData(response.data.data.dbData);
+          setCocktailData(response.data.data);
         })
         .catch((err) => {
           console.err("Error fetching data:", err);
@@ -99,9 +100,10 @@ function Recipes() {
   useEffect(() => {
     if (loggedInUserId) {
       axios
-        .get(`http://localhost:3001/usercreatedcocktails/${loggedInUserId}`)
+        .get(`${config.AWS_URL}/usercreatedcocktails/${loggedInUserId}`)
         .then((response) => {
-          setUserCreatedCocktails(response.data);
+          console.log(response.data.data);
+          setUserCreatedCocktails(response.data.data);
         })
         .catch((err) => {
           console.err("Error fetching user-created cocktails:", err);
@@ -162,9 +164,10 @@ function Recipes() {
         setSelectedFilter(filter);
 
         axios
-          .get("http://localhost:3001/allusercreatedcocktails")
+          .get(`${config.AWS_URL}}/allusercreatedcocktails`)
           .then((resp) => {
-            setFilteredCocktails(resp.data);
+            console.log(resp.data.data);
+            setFilteredCocktails(resp.data.data);
             setPage(1);
           })
           .catch((err) => {
