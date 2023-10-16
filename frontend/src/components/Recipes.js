@@ -82,14 +82,18 @@ function Recipes() {
       : cocktailData.slice(indexOfFirstCocktail, indexOfLastCocktail);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/recipes")
-      .then((response) => {
-        setCocktailData(response.data);
-      })
-      .catch((err) => {
-        console.err("Error fetching data:", err);
-      });
+    try {
+      axios
+        .get(
+          "https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/recipes"
+        )
+        .then((response) => {
+          setCocktailData(response.data.data.dbData);
+        })
+        .catch((err) => {
+          console.err("Error fetching data:", err);
+        });
+    } catch (err) {}
   }, []);
 
   useEffect(() => {
@@ -148,7 +152,6 @@ function Recipes() {
         setYourCreationsFilterActive(true);
         setalcoholSideImage(PersonalBottle);
       }
-
     } else if (filter === "All Creations") {
       if (selectedFilter === "All Creations") {
         setSelectedFilter(null);
