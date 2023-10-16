@@ -26,7 +26,7 @@ const Register = () => {
 
     try {
       await axios.post(
-        `${config.AWS_URL}/Prod/register`,
+        `${config.AWS_URL}/register`,
         {
           username: formData.username,
           email: formData.email,
