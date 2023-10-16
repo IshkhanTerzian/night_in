@@ -16,9 +16,9 @@ function LandingPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/recipes")
+      .get("https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/recipes")
       .then((response) => {
-        setCocktailData(response.data);
+        setCocktailData(response.data.data.dbData);
       })
       .catch((err) => {
         console.err("Error fetching data:", err);

@@ -46,11 +46,22 @@ const Login = () => {
 
       const userInfo = response.data.data;
 
+
+      
+
       const loggedInUser = userInfo.UserName;
+
+
+      console.log("username = " +  loggedInUser);
+      console.log("userId = " +  userInfo.UserId);
+      console.log("userType = " +  userInfo.UserType);
+      
       login(loggedInUser, userInfo.UserId);
       localStorage.setItem("username", loggedInUser);
       localStorage.setItem("userId", userInfo.UserId);
       localStorage.setItem("userType", userInfo.UserType);
+      
+
       navigate("/landingpage");
     } catch (error) {
       setErrorMessage("Login failed. Please check your credentials.");
