@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
 
-require('dotenv').config();
-
+import config from "../config.json";
 import "../styles/Login.css";
 import Footer from "./Footer";
 
@@ -34,7 +33,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.AWS_URL}/`,
+        `${config.AWS_URL}/`,
         {
           username,
           password,

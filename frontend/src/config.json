@@ -1,0 +1,4 @@
+{
+  "LOCAL_URL": "http://localhost:3001",
+  "AWS_URL": "https://erbvkyj49j.execute-api.us-east-1.amazonaws.com/Prod"
+}

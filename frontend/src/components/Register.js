@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
-require('dotenv').config();
-
+import config from "../config.json";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ const Register = () => {
 
     try {
       await axios.post(
-        `${process.env.AWS_URL}/Prod/register`,
+        `${config.AWS_URL}/Prod/register`,
         {
           username: formData.username,
           email: formData.email,
