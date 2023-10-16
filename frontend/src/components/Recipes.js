@@ -22,13 +22,9 @@ import {
 import EmptyBottle from "../assets/empty.png";
 import WhiskeyBottle from "../assets/whiskeybottle.jpg";
 import VodkaBottle from "../assets/vodka.png";
-// eslint-disable-next-line 
 import BrandyBottle from "../assets/brandy.png";
-// eslint-disable-next-line 
 import GinBottle from "../assets/gin.png";
-// eslint-disable-next-line 
 import RumBottle from "../assets/rum.png";
-// eslint-disable-next-line 
 import TequilaBottle from "../assets/tequila.png";
 import PersonalBottle from "../assets/personal.png";
 import AllCocktails from "../assets/allcocktails.png";

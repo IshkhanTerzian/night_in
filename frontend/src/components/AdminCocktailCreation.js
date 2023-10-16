@@ -89,7 +89,6 @@ const AdminCocktailCreation = () => {
         AlcoholTypeID: alcoholTypeID,
       };
 
-      // eslint-disable-next-line
       const response = await axios.post(
         `http://localhost:3001/admincreatingcocktail/`,
         requestData,
