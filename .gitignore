@@ -24,8 +24,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local configs
-./config.json
-.config.json
+config.json
 
 # Local Netlify folder
 .netlify
