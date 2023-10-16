@@ -29,7 +29,9 @@ const Login = () => {
    */
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+    console.log("USERNAME BEING PASSED" + username);
+    console.log("password BEING PASSED" + password);
+
     try {
       const response = await axios.post(
         `https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod/`,
