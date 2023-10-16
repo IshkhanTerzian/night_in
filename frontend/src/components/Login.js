@@ -29,8 +29,8 @@ const Login = () => {
    */
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("USERNAME BEING PASSED" + username);
-    console.log("password BEING PASSED" + password);
+    console.log("USERNAME BEING PASSED " + username);
+    console.log("password BEING PASSED " + password);
 
     try {
       const response = await axios.post(
@@ -45,13 +45,13 @@ const Login = () => {
           },
         }
       );
-  
-      const loggedInUser = response.data.user;
-      login(loggedInUser.UserName, loggedInUser.UserId);
-      localStorage.setItem("username", loggedInUser.UserName);
-      localStorage.setItem("userId", loggedInUser.UserId);
-      localStorage.setItem("userType", loggedInUser.UserType);
-      navigate("/landingpage");
+        console.log(response);
+      // const loggedInUser = response.data.user;
+      // login(loggedInUser.UserName, loggedInUser.UserId);
+      // localStorage.setItem("username", loggedInUser.UserName);
+      // localStorage.setItem("userId", loggedInUser.UserId);
+      // localStorage.setItem("userType", loggedInUser.UserType);
+      // navigate("/landingpage");
     } catch (error) {
       setErrorMessage("Login failed. Please check your credentials.");
     }
