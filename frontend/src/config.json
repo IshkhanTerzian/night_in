@@ -1,4 +1,4 @@
 {
-    "url": "https://night-in.xyz"
-  }
-  
+  "LOCAL_URL": "http://localhost:3001",
+  "AWS_URL": "https://cmi6sikkb9.execute-api.us-east-1.amazonaws.com/Prod"
+}
