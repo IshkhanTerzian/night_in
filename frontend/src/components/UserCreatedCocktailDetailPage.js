@@ -118,11 +118,10 @@ const UserCreatedCocktailDetailPage = () => {
       const response = await axios.delete(
         `http://localhost:3001/usercreatedcocktaildetailpage/${usercocktailId}`
       );
-
+  
       if (response.status === 200) {
+        console.log("Cocktail deleted successfully");
         navigate("/recipes");
-      } else {
-        alert("Error deleting cocktail.");
       }
     } catch (error) {
       console.error("Error deleting cocktail:", error);
@@ -131,7 +130,6 @@ const UserCreatedCocktailDetailPage = () => {
 
   const handleCreateForumPostClick = async () => {
     try {
-      // Prepare the data to be sent to the server
       const requestData = {
         userId: loggedInUserId,
         topicTitle: `${cocktailInfo.CocktailName} Review!`,
@@ -141,9 +139,8 @@ const UserCreatedCocktailDetailPage = () => {
         cocktailIDPlaceholder: usercocktailId,
       };
 
-      // Make the Axios POST request to your backend API
       const response = await axios.post(
-        "http://localhost:3001/createforumpostforcocktail", // Replace with your backend API endpoint
+        "http://localhost:3001/createforumpostforcocktail", 
         requestData,
         {
           headers: {
@@ -153,7 +150,6 @@ const UserCreatedCocktailDetailPage = () => {
       );
 
       if (response.status === 200) {
-        // You can optionally redirect to the forum post page or handle as needed
         navigate("/forum");
       } else {
         console.error("Error creating forum post.");
