@@ -77,7 +77,7 @@ function deletingForumOfUserCreatedCocktail(req, res) {
       return;
     }
 
-    const forumPostID = resultForumPostID[0].ForumPostIDFK;
+    const forumPostID = resultForumPostID[0].ForumPostID;
 
     const sql = "DELETE FROM addedforumpost WHERE ForumPostIDFK = ?";
     const sql2 = "DELETE FROM forum WHERE CocktailIDPlaceholder = ?";
@@ -146,8 +146,6 @@ function deletingForumOfUserCreatedCocktail(req, res) {
     });
   });
 }
-
-
 
 /**
  * Deleting the entire post and all the contents within

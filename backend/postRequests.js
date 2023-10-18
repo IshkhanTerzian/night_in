@@ -271,7 +271,7 @@ function createForumPostForCocktail(req, res) {
 
     const sql2 = `
         UPDATE usercreatedcocktails 
-        SET ForumPostID = ?, ForumExistsForCocktail = 'N' 
+        SET ForumPostID = ?, ForumExistsForCocktail = 'Y' 
         WHERE UserCocktailID = ?
       `;
 
