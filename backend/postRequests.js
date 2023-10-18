@@ -271,7 +271,7 @@ function createForumPostForCocktail(req, res) {
 
     const sql2 = `
         UPDATE usercreatedcocktails 
-        SET ForumPostID = ?, ForumExistsForCocktail = 'Y' 
+        SET ForumPostID = ?, ForumExistsForCocktail = 'N' 
         WHERE UserCocktailID = ?
       `;
 
@@ -285,8 +285,8 @@ function createForumPostForCocktail(req, res) {
       res.status(200).json({ message: "Forum post created successfully" });
     });
   });
-  res.status(500).json({ error: "Error creating forum post" });
 }
+
 
 /**
  * Updating a users password
