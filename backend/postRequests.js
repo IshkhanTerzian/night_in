@@ -501,7 +501,7 @@ function updateBannerHeading(req, res) {
   const { SiteBannerImage, SiteBannerText } = req.body;
   const imageSrc = Buffer.from(SiteBannerImage, "base64");
 
-  const sql = `UPDATE sitebanner SET SiteBannerImage = ?, SiteBannerText = ? WHERE SitebannerID = 1`;
+  const sql = `UPDATE sitebanner SET SiteBannerImage = ?, SiteBannerText = ? WHERE SitebannerID = 0`;
 
   const values = [imageSrc, SiteBannerText];
 
