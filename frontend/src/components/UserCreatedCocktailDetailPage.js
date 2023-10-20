@@ -4,6 +4,7 @@ import { Container, Col, Row, Button, Form } from "react-bootstrap";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
 
+import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
 
 const UserCreatedCocktailDetailPage = () => {
@@ -21,6 +22,10 @@ const UserCreatedCocktailDetailPage = () => {
   const [checkForumPost, setCheckForumPost] = useState("");
   const [incrementedSearchedCounter, setIncrementedSearchedCounter] =
     useState(null);
+
+  const [ratingStatus, setRatingStatus] = useState(null);
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
 
   useEffect(() => {
     const fetchUserCreatedCocktailDetails = async () => {
@@ -118,7 +123,7 @@ const UserCreatedCocktailDetailPage = () => {
       const response = await axios.delete(
         `http://localhost:3001/usercreatedcocktaildetailpage/${usercocktailId}`
       );
-  
+
       if (response.status === 200) {
         console.log("Cocktail deleted successfully");
         navigate("/recipes");
@@ -140,7 +145,7 @@ const UserCreatedCocktailDetailPage = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:3001/createforumpostforcocktail", 
+        "http://localhost:3001/createforumpostforcocktail",
         requestData,
         {
           headers: {
@@ -167,12 +172,83 @@ const UserCreatedCocktailDetailPage = () => {
     navigate(`/updatingUserCreatedCocktail/${usercocktailId}`);
   };
 
+  const handleLikes = () => {
+    if (ratingStatus !== "like") {
+      const updatedLikes = likes + 1;
+      const updatedDislikes =
+        ratingStatus === "dislike" ? dislikes - 1 : dislikes;
+
+      setLikes(updatedLikes);
+      setDislikes(updatedDislikes);
+
+      setRatingStatus("like");
+
+      updateRatings(updatedLikes, updatedDislikes);
+    }
+  };
+
+  const handleDislikes = () => {
+    if (ratingStatus !== "dislike") {
+      const updatedLikes = ratingStatus === "like" ? likes - 1 : likes;
+      const updatedDislikes = dislikes + 1;
+
+      setLikes(updatedLikes);
+      setDislikes(updatedDislikes);
+
+      setRatingStatus("dislike");
+
+      updateRatings(updatedLikes, updatedDislikes);
+    }
+  };
+
+  const updateRatings = (updatedLikes, updatedDislikes) => {
+    axios
+      .post("http://localhost:3001/updateRatings", {
+        likes: updatedLikes,
+        dislikes: updatedDislikes,
+        usercocktailId,
+      })
+      .then((response) => {
+      })
+      .catch((error) => {
+        console.error("Error updating the database:", error);
+      });
+  };
 
   return (
     <>
       <NavbarComponent />
       <Container className="mb-4 mt-4">
         <Row>
+          <Container className="mb-4 mt-4">
+            <Row>
+              <Col md={6}>
+                <div className="text-center">
+                  <h2>Total Likes: {likes}</h2>
+                  <Button
+                    variant="primary"
+                    onClick={handleLikes}
+                    disabled={ratingStatus === "like"}
+                  >
+                    Like
+                  </Button>
+                </div>
+              </Col>
+              <Col md={6}>
+                <div className="text-center">
+                  <h2>Total Dislikes: {dislikes}</h2>
+                  <Button
+                    variant="danger"
+                    onClick={handleDislikes}
+                    disabled={ratingStatus === "dislike"}
+                  >
+                    Dislike
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+
           <Col md={6}>
             {cocktailInfo && (
               <img
@@ -278,7 +354,10 @@ const UserCreatedCocktailDetailPage = () => {
                 >
                   Delete Cocktail
                 </Button>
-                <Button variant="danger" onClick={handleUserCreatedUpdateCocktail}>
+                <Button
+                  variant="danger"
+                  onClick={handleUserCreatedUpdateCocktail}
+                >
                   Update Cocktail
                 </Button>
               </>

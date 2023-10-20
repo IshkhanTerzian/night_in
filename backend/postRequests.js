@@ -480,6 +480,42 @@ function updateThreadPost(req, res) {
   });
 }
 
+function updateRatings(req, res) {
+  const { likes, dislikes, usercocktailId } = req.body;
+
+  const sql =
+    "UPDATE usercreatedcocktails SET TotalLikes = ?, TotalDislikes = ? WHERE UserCocktailID = ?";
+
+  const values = [likes, dislikes, usercocktailId];
+
+  conn.query(sql, values, function (err, result) {
+    if (err) {
+      res.status(500).json({ error: "Error updating raintg" });
+      return;
+    }
+    res.json({ message: "Ratings successfully updated" });
+  });
+}
+
+function updateBannerHeading(req, res) {
+  const { SiteBannerImage, SiteBannerText } = req.body;
+  const imageSrc = Buffer.from(SiteBannerImage, "base64");
+
+  const sql = `UPDATE sitebanner SET SiteBannerImage = ?, SiteBannerText = ? WHERE SitebannerID = 1`;
+
+  const values = [imageSrc, SiteBannerText];
+
+  conn.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error updating banner:", err);
+      res.status(500).json({ error: "Internal Server Error" });
+    } else {
+      console.log("Data updated successfully");
+      res.status(200).json({ message: "Data updated successfully" });
+    }
+  });
+}
+
 module.exports = {
   handleRegistration,
   handleLogin,
@@ -495,4 +531,6 @@ module.exports = {
   updateUserCreatedCocktail,
   updateMainThreadPost,
   updateThreadPost,
+  updateRatings,
+  updateBannerHeading,
 };

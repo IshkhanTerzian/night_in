@@ -22,6 +22,7 @@ import UpdatingBaseCocktail from "./components/UpdatingBaseCocktail";
 import UpdatingUserCreatedCocktail from "./components/UpdatingUserCreatedCocktail";
 import UpdateMainThreadPost from "./components/UpdateMainThreadPost";
 import UpdateThreadPost from "./components/UpdateThreadPost";
+import UpdateBanner from "./components/UpdateBanner";
 
 function App() {
   return (
@@ -87,6 +88,7 @@ function App() {
             path="/updatethreadpost/:threadID"
             element={<UpdateThreadPost />}
           />
+          <Route path="/updatebanner/" element={<UpdateBanner />} />
         </Routes>
       </AuthProvider>
     </Router>

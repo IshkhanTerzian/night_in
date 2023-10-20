@@ -8,7 +8,7 @@ const dotenv = require("dotenv").config();
 const PORT = process.env.PORT;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 app.use(bodyParser.json());
 
 const {
@@ -26,6 +26,8 @@ const {
   updateUserCreatedCocktail,
   updateMainThreadPost,
   updateThreadPost,
+  updateRatings, 
+  updateBannerHeading
 } = require("./postRequests");
 
 const {
@@ -45,6 +47,7 @@ const {
   getMostUserSearchedCocktails,
   getMostCommentedThread,
   getSingleThreadPost,
+  getUpdatedBannerImage
 } = require("./getRequests");
 
 const {
@@ -78,6 +81,8 @@ app.post(
 );
 app.post("/updateMainThreadPost/:forumpostId", updateMainThreadPost);
 app.post("/updatethreadpost/:threadID", updateThreadPost);
+app.post("/updateRatings", updateRatings);
+app.post("/updatebanner", updateBannerHeading);
 
 // ALL GETTERS HERE
 app.get("/recipes", getRecipes);
@@ -99,6 +104,7 @@ app.get("/mostBaseCocktailSearched", getMostBaseCocktailSearched);
 app.get("/mostUserSearchedCocktails", getMostUserSearchedCocktails);
 app.get("/mostCommentedThread", getMostCommentedThread);
 app.get("/getSingleThreadPost/:threadID", getSingleThreadPost);
+app.get("/updatedBannerImage", getUpdatedBannerImage);
 
 // ALL DELETES HERE
 app.delete("/recipedetailpage/:cocktailId", deleteBaseCocktail);

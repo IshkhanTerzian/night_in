@@ -409,6 +409,20 @@ function getMostCommentedThread(req, res) {
   });
 }
 
+function getUpdatedBannerImage(req, res) {
+  const sql = "SELECT * FROM sitebanner";
+  conn.query(sql, function (err, result) {
+    if (err) {
+      res.status(500).json({ error: "Error fetching site banner info" });
+    } else {
+      const data = result[0];
+      const base64Image = Buffer.from(data.SiteBannerImage).toString("base64");
+      data.SiteBannerImage = base64Image;
+      res.json(result);
+    }
+  });
+}
+
 module.exports = {
   getRecipes,
   getBaseDetailedRecipe,
@@ -426,4 +440,5 @@ module.exports = {
   getMostUserSearchedCocktails,
   getMostCommentedThread,
   getSingleThreadPost,
+  getUpdatedBannerImage,
 };
