@@ -33,8 +33,9 @@ function LandingPage() {
     axios
       .get(`${config.AWS_URL}/updatedBannerImage`)
       .then((response) => {
-        setImageFile(response.data[0].SiteBannerImage);
-        setBannerText(response.data[0].SiteBannerText);
+        console.log(response.data.data);
+        setImageFile(response.data.data[0].SiteBannerImage);
+        setBannerText(response.data.data[0].SiteBannerText);
       })
       .catch((err) => {
         console.error("Error fetching data:", err);
