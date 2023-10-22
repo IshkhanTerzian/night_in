@@ -48,15 +48,15 @@ const RecipeDetailPage = () => {
         const response = await axios.get(
           `${config.AWS_URL}/recipedetailpage/${cocktailId}`
         );
-        console.log(response.data.data);
-        setCocktailInfo(response.data.data);
-        setOriginalIngredients(response.data.data.Ingredients);
+        console.log(response.data.data[0]);
+        setCocktailInfo(response.data.data[0]);
+        setOriginalIngredients(response.data.data[0].Ingredients);
 
         if (!incrementedSearchedCounter) {
           const incrementSearchedCounterResponse = await axios.post(
             `${config.AWS_URL}/incrementSearchedCounter/${cocktailId}`,
             {
-              SearchedCounter: response.data.data.SearchedCounter || 0,
+              SearchedCounter: response.data.data[0].SearchedCounter || 0,
             }
           );
 
@@ -173,6 +173,7 @@ const RecipeDetailPage = () => {
     navigate(`/updatingBaseCocktail/${cocktailId}`);
   };
 
+  
   return (
     <>
       <NavbarComponent />
@@ -181,7 +182,7 @@ const RecipeDetailPage = () => {
           <Col md={6}>
             {cocktailInfo && (
               <img
-                src={`data:image/png;base64,${cocktailInfo.CocktailImageBase64}`}
+                src={`data:image/png;base64,${cocktailInfo.CocktailImage}`}
                 alt={cocktailInfo.CocktailName}
                 onError={(e) => {
                   console.error("Error loading image:", e);
