@@ -4,6 +4,7 @@ import { Container, Col, Row, Button, Form } from "react-bootstrap";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
 
+import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
 import "../styles/RecipeDetailPage.css";
 
@@ -45,16 +46,17 @@ const RecipeDetailPage = () => {
     const fetchCocktailDetailsAndIncrementCounter = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/recipedetailpage/${cocktailId}`
+          `${config.AWS_URL}/recipedetailpage/${cocktailId}`
         );
-        setCocktailInfo(response.data);
-        setOriginalIngredients(response.data.Ingredients);
+        console.log(response.data.data);
+        setCocktailInfo(response.data.data);
+        setOriginalIngredients(response.data.data.Ingredients);
 
         if (!incrementedSearchedCounter) {
           const incrementSearchedCounterResponse = await axios.post(
-            `http://localhost:3001/incrementSearchedCounter/${cocktailId}`,
+            `${config.AWS_URL}/incrementSearchedCounter/${cocktailId}`,
             {
-              SearchedCounter: response.data.SearchedCounter || 0,
+              SearchedCounter: response.data.data.SearchedCounter || 0,
             }
           );
 
