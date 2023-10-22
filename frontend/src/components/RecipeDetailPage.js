@@ -50,16 +50,14 @@ const RecipeDetailPage = () => {
         );
           console.log("FIRST RESPONSE");
         console.log(response.data.data);
-        console.log("SECOND RESPONSE");
-        console.log(response.data.data[0]);
-        setCocktailInfo(response.data.data[0]);
-        setOriginalIngredients(response.data.data[0].Ingredients);
+        setCocktailInfo(response.data.data);
+        setOriginalIngredients(response.data.data.Ingredients);
 
         if (!incrementedSearchedCounter) {
           const incrementSearchedCounterResponse = await axios.post(
             `${config.AWS_URL}/incrementSearchedCounter/${cocktailId}`,
             {
-              SearchedCounter: response.data.data[0].SearchedCounter || 0,
+              SearchedCounter: response.data.data.SearchedCounter || 0,
             }
           );
 
