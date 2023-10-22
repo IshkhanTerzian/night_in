@@ -62,7 +62,7 @@ function Recipes() {
     useState(false);
 
   // Variable to hold the images of alcohol types depending on user's filter choice
-  const [alcoholSideImage, setalcoholSideImage] = useState(EmptyBottle);
+  const [alcoholSideImage, setAlcoholSideImage] = useState(EmptyBottle);
 
   // Variable that sets max cocktails per page to be rendered
   const cocktailsPerPage = 9;
@@ -147,18 +147,18 @@ function Recipes() {
         setSelectedFilter(null);
         setFilteredCocktails([]);
         setYourCreationsFilterActive(false);
-        setalcoholSideImage(EmptyBottle);
+        setAlcoholSideImage(EmptyBottle);
       } else {
         setSelectedFilter(filter);
         setFilteredCocktails(userCreatedCocktails);
         setYourCreationsFilterActive(true);
-        setalcoholSideImage(PersonalBottle);
+        setAlcoholSideImage(PersonalBottle);
       }
     } else if (filter === "All Creations") {
       if (selectedFilter === "All Creations") {
         setSelectedFilter(null);
         setFilteredCocktails([]);
-        setalcoholSideImage(EmptyBottle);
+        setAlcoholSideImage(EmptyBottle);
         setYourCreationsFilterActive(false);
       } else {
         setSelectedFilter(filter);
@@ -176,7 +176,7 @@ function Recipes() {
             });
         } catch (err) {}
 
-        setalcoholSideImage(AllCocktails);
+        setAlcoholSideImage(AllCocktails);
         setYourCreationsFilterActive(false);
       }
     } else {
@@ -187,41 +187,41 @@ function Recipes() {
         case "Sweet":
         case "Dinner":
           alcoholTypeId = 1;
-          setalcoholSideImage(VodkaBottle);
+          setAlcoholSideImage(VodkaBottle);
           break;
         case "Whiskey":
         case "Savoury":
         case "Lubch":
           alcoholTypeId = 2;
-          setalcoholSideImage(WhiskeyBottle);
+          setAlcoholSideImage(WhiskeyBottle);
           break;
         case "Brandy":
         case "Smokey":
         case "Dinner":
           alcoholTypeId = 3;
-          setalcoholSideImage(BrandyBottle);
+          setAlcoholSideImage(BrandyBottle);
           break;
         case "Gin":
         case "Sour":
         case "Lunch":
           alcoholTypeId = 4;
-          setalcoholSideImage(GinBottle);
+          setAlcoholSideImage(GinBottle);
           break;
         case "Rum":
         case "Spicy":
         case "Brunch":
           alcoholTypeId = 5;
-          setalcoholSideImage(RumBottle);
+          setAlcoholSideImage(RumBottle);
           break;
         case "Tequila":
         case "Savoury":
         case "Brunch":
           alcoholTypeId = 6;
-          setalcoholSideImage(TequilaBottle);
+          setAlcoholSideImage(TequilaBottle);
           break;
         default:
           alcoholTypeId = 0;
-          setalcoholSideImage(EmptyBottle);
+          setAlcoholSideImage(EmptyBottle);
       }
       setActiveFilters((prevFilters) =>
         prevFilters.includes(filter)
@@ -232,7 +232,7 @@ function Recipes() {
       if (selectedFilter === filter) {
         setSelectedFilter(null);
         setFilteredCocktails([]);
-        setalcoholSideImage(EmptyBottle);
+        setAlcoholSideImage(EmptyBottle);
       } else {
         setSelectedFilter(filter);
         const filtered = cocktailData.filter(

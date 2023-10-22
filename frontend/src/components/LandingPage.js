@@ -11,11 +11,19 @@ import Footer from "./Footer";
 import "../styles/LandingPage.css";
 
 function LandingPage() {
+
   const navigate = useNavigate();
+
+  // Variable to check the user type
   const { loggedInUserType } = useAuth();
+
   // Array to hold the cocktails being called from the DB
   const [cocktailData, setCocktailData] = useState([]);
+
+  // Variable that holds the banner image  
   const [imageFile, setImageFile] = useState(null);
+
+  // Variable that holds the banner text
   const [bannerText, setBannerText] = useState("");
 
   useEffect(() => {
@@ -33,7 +41,6 @@ function LandingPage() {
     axios
       .get(`${config.AWS_URL}/updatedBannerImage`)
       .then((response) => {
-        console.log(response.data.data);
         setImageFile(response.data.data[0].SiteBannerImage);
         setBannerText(response.data.data[0].SiteBannerText);
       })
@@ -50,6 +57,9 @@ function LandingPage() {
     navigate(`/recipedetailpage/${cocktailId}`);
   };
 
+  /**
+   * Handles the navigation to updating banner page
+   */
   const handleUpdateBanner = () => {
     navigate("/updatebanner");
   };
