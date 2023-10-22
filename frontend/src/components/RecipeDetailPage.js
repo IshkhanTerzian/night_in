@@ -48,8 +48,6 @@ const RecipeDetailPage = () => {
         const response = await axios.get(
           `${config.AWS_URL}/recipedetailpage/${cocktailId}`
         );
-          console.log("FIRST RESPONSE");
-        console.log(response.data.data);
         setCocktailInfo(response.data.data);
         setOriginalIngredients(response.data.data.Ingredients);
 
@@ -153,7 +151,7 @@ const RecipeDetailPage = () => {
   const handleDeleteCocktail = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:3001/recipedetailpage/${cocktailId}`
+        `${config.AWS_URL}/recipedetailpage/${cocktailId}`
       );
 
       if (response.status === 200) {
