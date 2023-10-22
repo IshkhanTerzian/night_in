@@ -48,6 +48,9 @@ const RecipeDetailPage = () => {
         const response = await axios.get(
           `${config.AWS_URL}/recipedetailpage/${cocktailId}`
         );
+          console.log("FIRST RESPONSE");
+        console.log(response.data.data);
+        console.log("SECOND RESPONSE");
         console.log(response.data.data[0]);
         setCocktailInfo(response.data.data[0]);
         setOriginalIngredients(response.data.data[0].Ingredients);
