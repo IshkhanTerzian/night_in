@@ -3,6 +3,7 @@ import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
 import "../styles/AdminCocktailCreation.css";
 
@@ -90,7 +91,7 @@ const AdminCocktailCreation = () => {
       };
 
       const response = await axios.post(
-        `http://localhost:3001/admincreatingcocktail/`,
+        `${config.AWS_URL}/admincreatingcocktail/`,
         requestData,
         {
           headers: {
