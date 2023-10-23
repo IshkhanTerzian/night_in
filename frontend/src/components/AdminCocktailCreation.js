@@ -91,7 +91,7 @@ const AdminCocktailCreation = () => {
       };
 
       const response = await axios.post(
-        `${config.AWS_URL}/admincreatingcocktail/`,
+        `${config.AWS_URL}/admincreatingcocktail`,
         requestData,
         {
           headers: {
