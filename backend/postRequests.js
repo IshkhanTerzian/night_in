@@ -136,7 +136,7 @@ function creatingBaseCocktail(req, res) {
 
         const sql2 = `
           INSERT INTO ingredientsincocktail (CocktailID, IngredientID, Quantity, Unit)
-          VALUES ?`;
+          VALUES (?,?,?,?)`;
 
         conn.query(sql2, [values2], (err, result) => {
           if (err) {

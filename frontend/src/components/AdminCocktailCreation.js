@@ -45,7 +45,7 @@ const AdminCocktailCreation = () => {
   };
 
   /**
-   * Adds a new ingredient object into the ingrientLines object
+   * Adds a new ingredient object into the ingredientLines object
    */
   const addNewIngredient = () => {
     const ingredientAdded = {
