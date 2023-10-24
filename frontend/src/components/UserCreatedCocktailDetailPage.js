@@ -33,7 +33,6 @@ const UserCreatedCocktailDetailPage = () => {
         const response = await axios.get(
           `${config.AWS_URL}/usercreatedcocktaildetailpage/${usercocktailId}`
         );
-        console.log("RESPONSE", JSON.stringify(response.data.data));
         setCocktailInfo(response.data.data);  
         setLikes(response.data.data.TotalLikes);
         setDislikes(response.data.data.TotalDislikes);
