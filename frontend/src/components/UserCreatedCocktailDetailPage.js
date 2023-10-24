@@ -33,9 +33,11 @@ const UserCreatedCocktailDetailPage = () => {
         const response = await axios.get(
           `${config.AWS_URL}/usercreatedcocktaildetailpage/${usercocktailId}`
         );
-        console.log("RESPONSE: " + response.data.data);
-        setCocktailInfo(response.data.data);
-        const parsedIngredients = JSON.parse(response.data.data.Ingredients);
+        console.log("RESPONSE: " + response.data);
+
+        console.log("RESPONSE: " + response.data);
+        setCocktailInfo(response.data);
+        const parsedIngredients = JSON.parse(response.data.Ingredients);
         setOriginalIngredients(parsedIngredients);
 
         if (!incrementedSearchedCounter) {
@@ -121,7 +123,7 @@ const UserCreatedCocktailDetailPage = () => {
   const handleDeleteCocktail = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:3001/usercreatedcocktaildetailpage/${usercocktailId}`
+        `${config.AWS_URL}/usercreatedcocktaildetailpage/${usercocktailId}`
       );
 
       if (response.status === 200) {
@@ -145,7 +147,7 @@ const UserCreatedCocktailDetailPage = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:3001/createforumpostforcocktail",
+        `${config.AWS_URL}/createforumpostforcocktail`,
         requestData,
         {
           headers: {
@@ -203,7 +205,7 @@ const UserCreatedCocktailDetailPage = () => {
 
   const updateRatings = (updatedLikes, updatedDislikes) => {
     axios
-      .post("http://localhost:3001/updateRatings", {
+      .post(`${config.AWS_URL}/updateRatings`, {
         likes: updatedLikes,
         dislikes: updatedDislikes,
         usercocktailId,
