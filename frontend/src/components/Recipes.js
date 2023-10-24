@@ -101,8 +101,6 @@ function Recipes() {
         axios
           .get(`${config.AWS_URL}/usercreatedcocktails/${loggedInUserId}`)
           .then((response) => {
-            console.log(response);
-            console.log("RESPONSE FROM RECIPES" + response.data);
             setUserCreatedCocktails(response.data.data);
           })
           .catch((err) => {
