@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
+
+import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
 import "../styles/UpdatingUserCreatedCocktail.css"; 
 
@@ -20,9 +22,10 @@ const UpdatingUserCreatedCocktail = () => {
     const fetchUserCreatedCocktailDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/usercreatedcocktaildetailpage/${usercocktailId}`
+          `${config.AWS_URL}/usercreatedcocktaildetailpage/${usercocktailId}`
         );
-        const data = response.data;
+        console.log("RESPONSE" + response.data.data);
+        const data = response.data.data;
         const parsedIngredients = JSON.parse(data.Ingredients);
         setIngredientLines(parsedIngredients);
         setEditedCocktailName(data.CocktailName);
@@ -51,7 +54,7 @@ const UpdatingUserCreatedCocktail = () => {
       };
 
       const response = await axios.post(
-        `http://localhost:3001/updateUserCreatedCocktail/${usercocktailId}`,
+        `${config.AWS_URL}/updateUserCreatedCocktail/${usercocktailId}`,
         updatedCocktailData,
         {
           headers: {
@@ -147,7 +150,7 @@ const UpdatingUserCreatedCocktail = () => {
                   />
                   <Button
                     variant="link"
-                    className="file-input-button" // Add this class
+                    className="file-input-button" 
                     as="label"
                     htmlFor="formFile"
                   >
