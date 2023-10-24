@@ -34,8 +34,8 @@ const UserCreatedCocktailDetailPage = () => {
           `${config.AWS_URL}/usercreatedcocktaildetailpage/${usercocktailId}`
         );
 
-        console.log("RESPONSE: " + response.data.data);
-        
+        console.log("RESPONSE: " + response.data.data.data);
+
         setCocktailInfo(response.data.data);
         const parsedIngredients = JSON.parse(response.data.dataIngredients);
         setOriginalIngredients(parsedIngredients);
