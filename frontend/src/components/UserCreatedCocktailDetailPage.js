@@ -35,6 +35,8 @@ const UserCreatedCocktailDetailPage = () => {
         );
         console.log("RESPONSE", JSON.stringify(response.data.data));
         setCocktailInfo(response.data.data);  
+        setLikes(response.data.data.TotalLikes);
+        setDislikes(response.data.data.TotalDislikes);
         const parsedIngredients = JSON.parse(response.data.data.Ingredients);
         setOriginalIngredients(parsedIngredients);
 
