@@ -33,11 +33,11 @@ const UserCreatedCocktailDetailPage = () => {
         const response = await axios.get(
           `${config.AWS_URL}/usercreatedcocktaildetailpage/${usercocktailId}`
         );
-
-        console.log("RESPONSE: " + response.data.data.data);
+        console.log("RESPONSE 1 : " + response.data);
+        console.log("RESPONSE: 2" + response.data.data);
 
         setCocktailInfo(response.data.data);
-        const parsedIngredients = JSON.parse(response.data.dataIngredients);
+        const parsedIngredients = JSON.parse(response.data.data.Ingredients);
         setOriginalIngredients(parsedIngredients);
 
         if (!incrementedSearchedCounter) {
@@ -254,7 +254,7 @@ const UserCreatedCocktailDetailPage = () => {
           <Col md={6}>
             {cocktailInfo && (
               <img
-                src={`data:image/png;base64,${cocktailInfo.CocktailImageBase64}`}
+                src={`data:image/png;base64,${cocktailInfo.CocktailImage}`}
                 alt={cocktailInfo.CocktailName}
                 onError={(e) => {
                   console.error("Error loading image:", e);
