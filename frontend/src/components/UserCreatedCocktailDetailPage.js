@@ -33,10 +33,8 @@ const UserCreatedCocktailDetailPage = () => {
         const response = await axios.get(
           `${config.AWS_URL}/usercreatedcocktaildetailpage/${usercocktailId}`
         );
-        console.log("RESPONSE 1 : " + response.data);
-        console.log("RESPONSE: 2" + response.data.data);
-
-        setCocktailInfo(response.data.data);
+        console.log("RESPONSE" + response.data.data);
+        setCocktailInfo(response.data.data);  
         const parsedIngredients = JSON.parse(response.data.data.Ingredients);
         setOriginalIngredients(parsedIngredients);
 
