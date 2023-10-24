@@ -31,18 +31,18 @@ const UserCreatedCocktailDetailPage = () => {
     const fetchUserCreatedCocktailDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/usercreatedcocktaildetailpage/${usercocktailId}`
+          `${config.AWS_URL}/usercreatedcocktaildetailpage/${usercocktailId}`
         );
-
-        setCocktailInfo(response.data);
-        const parsedIngredients = JSON.parse(response.data.Ingredients);
+        console.log("RESPONSE: " + response.data.data);
+        setCocktailInfo(response.data.data);
+        const parsedIngredients = JSON.parse(response.data.data.Ingredients);
         setOriginalIngredients(parsedIngredients);
 
         if (!incrementedSearchedCounter) {
           const incrementSearchedCounterResponse = await axios.post(
-            `http://localhost:3001/incrementUserSearchedCounter/${usercocktailId}`,
+            `${config.AWS_URL}/incrementUserSearchedCounter/${usercocktailId}`,
             {
-              SearchedCounter: response.data.SearchedCounter || 0,
+              SearchedCounter: response.data.data.SearchedCounter || 0,
             }
           );
 
@@ -57,7 +57,7 @@ const UserCreatedCocktailDetailPage = () => {
           }
         }
 
-        setCheckForumPost(response.data.ForumExistsForCocktail);
+        setCheckForumPost(response.data.data.ForumExistsForCocktail);
       } catch (error) {
         console.error(
           "Error fetching user-created cocktail information:",
