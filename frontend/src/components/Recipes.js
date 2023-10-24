@@ -101,7 +101,7 @@ function Recipes() {
         axios
           .get(`${config.AWS_URL}/usercreatedcocktails/${loggedInUserId}`)
           .then((response) => {
-            console.log(response.data.data);
+            console.log("RESPONSE FROM RECIPES" + response.data.data);
             setUserCreatedCocktails(response.data.data);
           })
           .catch((err) => {
@@ -167,7 +167,6 @@ function Recipes() {
           axios
             .get(`${config.AWS_URL}/allusercreatedcocktails`)
             .then((response) => {
-              console.log(response.data.data);
               setFilteredCocktails(response.data.data);
               setPage(1);
             })
