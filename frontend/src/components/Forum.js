@@ -4,6 +4,7 @@ import { useAuth } from "./AuthContext";
 import { Container, Button } from "react-bootstrap";
 import axios from "axios";
 
+import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
 import "../styles/Forum.css";
 
@@ -24,9 +25,10 @@ function Forum() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/forum")
+      .get(`${config.AWS_URL}/forum`)
       .then((response) => {
-        const sortedForumPosts = sortForumPostsByCreationDate(response.data);
+        console.log("FORUM DATA:  " + response.data.data);
+        const sortedForumPosts = sortForumPostsByCreationDate(response.data.data);
         setForumPosts(sortedForumPosts);
       })
       .catch((error) => {
@@ -36,9 +38,10 @@ function Forum() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/forum/replyCounts")
+      .get(`${config.AWS_URL}/forum/replyCounts`)
       .then((response) => {
-        setReplyCounts(response.data);
+        console.log("REPLY COUNTS DATA: " + response.data.data);
+        setReplyCounts(response.data.data);
       })
       .catch((error) => {
         console.error("Error fetching reply counts:", error);
@@ -91,7 +94,7 @@ function Forum() {
    */
   const handleRemoveButtonClick = (forumPostID) => {
     axios
-      .delete(`http://localhost:3001/removeforumpost/${forumPostID}`)
+      .delete(`${config.AWS_URL}/removeforumpost/${forumPostID}`)
       .then((response) => {
         const updatedForumPosts = forumPosts.filter(
           (post) => post.ForumPostID !== forumPostID
