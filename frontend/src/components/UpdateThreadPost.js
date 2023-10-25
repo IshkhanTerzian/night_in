@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Container, Button, Form } from "react-bootstrap";
 import axios from "axios";
 
+import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
 
 function UpdateMainThreadPost() {
@@ -16,9 +17,9 @@ function UpdateMainThreadPost() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/getSingleThreadPost/${threadID}`)
+      .get(`${config.AWS_URL}/getSingleThreadPost/${threadID}`)
       .then((response) => {
-        const data = response.data[0];
+        const data = response.data.data[0];
         setEditedContent(data.Content);
       })
       .catch((error) => {
@@ -32,7 +33,7 @@ function UpdateMainThreadPost() {
    */
   const handleUpdateThread = () => {
     axios
-      .post(`http://localhost:3001/updatethreadpost/${threadID}`, {
+      .post(`${config.AWS_URL}/updatethreadpost/${threadID}`, {
         Content: editedContent,
       })
       .then((response) => {

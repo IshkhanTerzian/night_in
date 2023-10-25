@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Container, Button, Form } from "react-bootstrap";
 import axios from "axios";
 
+import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
 
 function UpdateMainThreadPost() {
@@ -23,10 +24,10 @@ function UpdateMainThreadPost() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/forumpostcontentpage/${forumpostId}`)
+      .get(`${config.AWS_URL}/forumpostcontentpage/${forumpostId}`)
       .then((response) => {
-        if (response.data && response.data.length > 0) {
-          const postData = response.data[0];
+        if (response.data.data && response.data.data.length > 0) {
+          const postData = response.data.data[0];
           setData(postData);
           setEditedTopicTitle(postData.TopicTitle);
           setEditedContent(postData.Content);
@@ -42,12 +43,12 @@ function UpdateMainThreadPost() {
    */
   const handleUpdateMainThread = () => {
     axios
-      .post(`http://localhost:3001/updateMainThreadPost/${forumpostId}`, {
+      .post(`${config.AWS_URL}/updateMainThreadPost/${forumpostId}`, {
         TopicTitle: editedTopicTitle,
         Content: editedContent,
       })
       .then((response) => {
-        console.log("Content updated successfully:", response.data);
+        console.log("Content updated successfully:", response.data.data);
 
         navigate(`/forumpostcontentpage/${forumpostId}`);
       })
