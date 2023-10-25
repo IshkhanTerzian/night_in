@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
 
+import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
 import "../styles/ForumPostContentPage.css"; 
 
@@ -31,9 +32,10 @@ function ForumPostContentPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/forumpostcontentpage/${forumpostId}`)
+      .get(`${config.AWS_URL}/forumpostcontentpage/${forumpostId}`)
       .then((response) => {
-        setData(response.data);
+        console.log("FORUM CONTENT " + JSON.stringify(response));
+        setData(response.data.data);
       })
       .catch((error) => {
         console.error("Error fetching forum post:", error);
@@ -42,9 +44,11 @@ function ForumPostContentPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/userforumpost/${forumpostId}`)
+      .get(`${config.AWS_URL}/userforumpost/${forumpostId}`)
       .then((response) => {
-        setAdditionalPosts(response.data);
+        console.log("userforumpost" + JSON.stringify(response));
+
+        setAdditionalPosts(response.data.data);
       })
       .catch((error) => {
         console.error("Error fetching additional forum posts:", error);
@@ -69,7 +73,7 @@ function ForumPostContentPage() {
     if (commentText.trim() !== "") {
       axios
         .post(
-          `http://localhost:3001/forumpostcontentpage/${loggedInUserId}/${forumpostId}`,
+          `${config.AWS_URL}/forumpostcontentpage/${loggedInUserId}/${forumpostId}`,
           {
             content: commentText,
           }
@@ -90,7 +94,7 @@ function ForumPostContentPage() {
    */
   const handleRemoveButtonClick = (threadID) => {
     axios
-      .delete(`http://localhost:3001/removeaddedpost/${threadID}`)
+      .delete(`${config.AWS_URL}/removeaddedpost/${threadID}`)
       .then((response) => {
         window.location.reload();
       })

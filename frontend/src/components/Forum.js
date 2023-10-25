@@ -27,7 +27,7 @@ function Forum() {
     axios
       .get(`${config.AWS_URL}/forum`)
       .then((response) => {
-        console.log("FORUM DATA:  " + response.data.data);
+        console.log("FORUM DATA:  " + JSON.stringify(response));
         const sortedForumPosts = sortForumPostsByCreationDate(response.data.data);
         setForumPosts(sortedForumPosts);
       })
@@ -40,7 +40,7 @@ function Forum() {
     axios
       .get(`${config.AWS_URL}/forum/replyCounts`)
       .then((response) => {
-        console.log("REPLY COUNTS DATA: " + response.data.data);
+        console.log("REPLY COUNTS DATA: " + JSON.stringify(response));
         setReplyCounts(response.data.data);
       })
       .catch((error) => {
