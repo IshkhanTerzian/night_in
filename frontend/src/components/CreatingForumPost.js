@@ -4,6 +4,7 @@ import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
 
 function CreatingForumPost() {
@@ -48,7 +49,7 @@ function CreatingForumPost() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/creatingforumpostpage",
+        `${config.AWS_URL}/creatingforumpostpage`,
         forumPost
       );
 

@@ -34,7 +34,6 @@ function ForumPostContentPage() {
     axios
       .get(`${config.AWS_URL}/forumpostcontentpage/${forumpostId}`)
       .then((response) => {
-        console.log("FORUM CONTENT " + JSON.stringify(response));
         setData(response.data.data);
       })
       .catch((error) => {
@@ -46,8 +45,6 @@ function ForumPostContentPage() {
     axios
       .get(`${config.AWS_URL}/userforumpost/${forumpostId}`)
       .then((response) => {
-        console.log("userforumpost" + JSON.stringify(response));
-
         setAdditionalPosts(response.data.data);
       })
       .catch((error) => {
