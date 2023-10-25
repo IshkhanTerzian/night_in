@@ -63,7 +63,7 @@ app.post("/register", handleRegistration);
 app.post("/usercreatingcocktail/:userId", creatingNewUserCocktail);
 app.post("/admincreatingcocktail", creatingBaseCocktail);
 app.post("/creatingforumpostpage", createForumPosts);
-app.post("/forumpostcontentpage/:userId/:forumPostId", addNewForumThread);
+app.post("/addnewpost", addNewForumThread);
 app.post("/createforumpostforcocktail", createForumPostForCocktail);
 app.post("/updatepassword/:userId", updateUserPassword);
 app.post(

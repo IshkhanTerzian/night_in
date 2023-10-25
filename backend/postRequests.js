@@ -196,8 +196,7 @@ function createForumPosts(req, res) {
  * @param {*} res - The HTTP response object
  */
 function addNewForumThread(req, res) {
-  const { userId, forumPostId } = req.params;
-  const { content } = req.body;
+  const { content, userId, forumPostId } = req.body;
 
   const sql = `INSERT INTO addedforumpost (ForumPostIDFK, UserID, Content) VALUES (?, ?, ?)`;
   const values = [forumPostId, userId, content];

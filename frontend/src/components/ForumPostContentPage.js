@@ -73,8 +73,10 @@ function ForumPostContentPage() {
     if (commentText.trim() !== "") {
       axios
         .post(
-          `${config.AWS_URL}/forumpostcontentpage/${loggedInUserId}/${forumpostId}`,
+          `${config.AWS_URL}/addnewpost`,
           {
+            userId: loggedInUserId,
+            forumpostId: forumpostId,
             content: commentText,
           }
         )
