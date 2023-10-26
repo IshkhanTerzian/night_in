@@ -38,6 +38,7 @@ const PasswordChangeForm = () => {
     axios
       .get(`${config.AWS_URL}/password/${loggedInUserId}`)
       .then((response) => {
+        console.log("RESPONSE " + JSON.stringify(response));
         setDbCurrentPassword(response.data.data);
       })
       .catch((error) => {
