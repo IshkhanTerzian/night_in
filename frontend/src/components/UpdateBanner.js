@@ -8,19 +8,35 @@ import NavbarComponent from "./NavbarComponent";
 import "../styles/UpdateBanner.css";
 
 function UpdateBanner() {
-  const [imageFile, setImageFile] = useState(null);
-  const [textInput, setTextInput] = useState("");
   const navigate = useNavigate();
 
+  // Variable that holds the image
+  const [imageFile, setImageFile] = useState(null);
+
+  // Variable that holds the text input
+  const [textInput, setTextInput] = useState("");
+
+  /**
+   * Handles the input change for the image file
+   * @param {Event} e The input field change event
+   */
   const handleFileInputChange = async (e) => {
     const file = e.target.files[0];
     setImageFile(file);
   };
 
+  /**
+   * Handles the text change
+   * @param {Event} e The input field change event
+   */
   const handleTextChange = (e) => {
     setTextInput(e.target.value);
   };
 
+  /**
+   * Handles the button press to update the
+   * specified cocktail information
+   */
   const handleUpdate = async () => {
     if (imageFile) {
       try {
@@ -49,6 +65,11 @@ function UpdateBanner() {
     }
   };
 
+  /**
+   * Converts an image file to base64 format
+   * @param {File} imageFile - The image file to convert
+   * @returns {Promise<string|null>} A Promise that resolves to the base64-encoded image data or null if no file is provided
+   */
   const convertImageToBase64 = (imageFile) => {
     return new Promise((resolve, reject) => {
       if (!imageFile) {

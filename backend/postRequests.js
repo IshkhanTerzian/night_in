@@ -19,8 +19,6 @@ function handleRegistration(req, res) {
   });
 }
 
-
-
 /**
  * Finds if the account exists to attempt login
  *
@@ -285,7 +283,6 @@ function createForumPostForCocktail(req, res) {
     });
   });
 }
-
 
 /**
  * Updating a users password

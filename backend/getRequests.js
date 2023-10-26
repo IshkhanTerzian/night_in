@@ -409,6 +409,11 @@ function getMostCommentedThread(req, res) {
   });
 }
 
+/**
+ * Gets the updated banner image
+ * @param {*} req - The HTTP request object
+ * @param {*} res - The HTTP response object
+ */
 function getUpdatedBannerImage(req, res) {
   const sql = "SELECT * FROM sitebanner";
   conn.query(sql, function (err, result) {

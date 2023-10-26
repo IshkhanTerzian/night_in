@@ -8,7 +8,7 @@ const dotenv = require("dotenv").config();
 const PORT = process.env.PORT;
 
 app.use(cors());
-app.use(express.json({ limit: '50mb' }));
+app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json());
 
 const {
@@ -26,8 +26,8 @@ const {
   updateUserCreatedCocktail,
   updateMainThreadPost,
   updateThreadPost,
-  updateRatings, 
-  updateBannerHeading
+  updateRatings,
+  updateBannerHeading,
 } = require("./postRequests");
 
 const {
@@ -47,7 +47,7 @@ const {
   getMostUserSearchedCocktails,
   getMostCommentedThread,
   getSingleThreadPost,
-  getUpdatedBannerImage
+  getUpdatedBannerImage,
 } = require("./getRequests");
 
 const {

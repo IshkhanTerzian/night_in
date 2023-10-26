@@ -10,21 +10,47 @@ import NavbarComponent from "./NavbarComponent";
 const UserCreatedCocktailDetailPage = () => {
   const navigate = useNavigate();
 
+  // Variable that holds information of the logged in user
   const { loggedInUserType, loggedInUserId } = useAuth();
+
+  // Variable that holds the user cocktail id
   const { usercocktailId } = useParams();
+
+  // Variable that holds the cocktail info
   const [cocktailInfo, setCocktailInfo] = useState(null);
+
+  // Variable that sets the search type of user
   const [selectedSize, setSelectedSize] = useState("Select Size");
+
+  // Boolean to check if the single button is selected
   const [isSingleButtonActive, setIsSingleButtonActive] = useState(true);
+
+  // Boolean to check if the custom button is selected
   const [isCustomButtonActive, setIsCustomButtonActive] = useState(false);
+
+  // Variable that sets custom quantity to be altered
   const [customQuantity, setCustomQuantity] = useState(1);
+
+  // Array to hold the ingredients
   const [originalIngredients, setOriginalIngredients] = useState([]);
+
+  // Variable that holds the error messages
   const [customQuantityError, setCustomQuantityError] = useState("");
+
+  // Variable that sets the forum post exists
   const [checkForumPost, setCheckForumPost] = useState("");
+
+  // Variable that increments the counter when visited
   const [incrementedSearchedCounter, setIncrementedSearchedCounter] =
     useState(null);
 
+  // Variable that holds the rating status of the specified recipe
   const [ratingStatus, setRatingStatus] = useState(null);
+
+  // Variable that holds the total likes the specified recipe has
   const [likes, setLikes] = useState(0);
+
+  // Variable that holds the total dislikes the specified recipe has
   const [dislikes, setDislikes] = useState(0);
 
   useEffect(() => {
@@ -70,6 +96,9 @@ const UserCreatedCocktailDetailPage = () => {
     fetchUserCreatedCocktailDetails();
   }, [usercocktailId, incrementedSearchedCounter]);
 
+  /**
+   * Handles the single click event
+   */
   const handleSingleClick = () => {
     setSelectedSize("Single");
     setIsSingleButtonActive(true);
@@ -83,16 +112,26 @@ const UserCreatedCocktailDetailPage = () => {
     });
   };
 
+  /**
+   * Handles the custom click event
+   */
   const handleCustomClick = () => {
     setSelectedSize("Custom");
     setIsSingleButtonActive(false);
     setIsCustomButtonActive(true);
   };
 
+  /**
+   * Handles the custom quantity to change
+   * @param {Event} event Object to change the value
+   */
   const handleCustomQuantityChange = (event) => {
     setCustomQuantity(event.target.value);
   };
 
+  /**
+   * Handles the calculation of the custom value specified
+   */
   const handleCustomCalculate = () => {
     const customQuantityValue = parseFloat(customQuantity);
     if (
@@ -119,6 +158,9 @@ const UserCreatedCocktailDetailPage = () => {
     }
   };
 
+  /**
+   * Handles the deletion of the cocktail
+   */
   const handleDeleteCocktail = async () => {
     try {
       const response = await axios.delete(
@@ -133,6 +175,9 @@ const UserCreatedCocktailDetailPage = () => {
     }
   };
 
+  /**
+   * Handles the creation of the forum post of the specified cocktail
+   */
   const handleCreateForumPostClick = async () => {
     try {
       const requestData = {
@@ -172,6 +217,9 @@ const UserCreatedCocktailDetailPage = () => {
     navigate(`/updatingUserCreatedCocktail/${usercocktailId}`);
   };
 
+  /**
+   * Handles the likes to increment and decrement dislikes
+   */
   const handleLikes = () => {
     if (ratingStatus !== "like") {
       const updatedLikes = likes + 1;
@@ -187,6 +235,9 @@ const UserCreatedCocktailDetailPage = () => {
     }
   };
 
+  /**
+   * Handles the dislikes to increment and decrement likes
+   */
   const handleDislikes = () => {
     if (ratingStatus !== "dislike") {
       const updatedLikes = ratingStatus === "like" ? likes - 1 : likes;
@@ -201,6 +252,11 @@ const UserCreatedCocktailDetailPage = () => {
     }
   };
 
+  /**
+   * Handles the updating ratings of the specific cocktail
+   * @param {Event} updatedLikes Value to hold the likes
+   * @param {Event} updatedDislikes Value to hold the dislikes
+   */
   const updateRatings = (updatedLikes, updatedDislikes) => {
     axios
       .post(`${config.AWS_URL}/updateRatings`, {

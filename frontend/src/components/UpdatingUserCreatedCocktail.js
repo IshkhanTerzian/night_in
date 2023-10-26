@@ -9,13 +9,29 @@ import "../styles/UpdatingUserCreatedCocktail.css";
 
 const UpdatingUserCreatedCocktail = () => {
   const navigate = useNavigate();
+
+  // Variable that holds the usercocktailId
   const { usercocktailId } = useParams();
+
+  // Variable that holds the edited cocktail name
   const [editedCocktailName, setEditedCocktailName] = useState("");
+
+  // Variable that holds the edited cocktail descriptions
   const [editedDescription, setEditedDescription] = useState("");
+
+  // Variable that holds the edited cocktail instructions
   const [editedInstructions, setEditedInstructions] = useState("");
+
+  // Array that holds the each ingredient
   const [ingredientLines, setIngredientLines] = useState([]);
+
+  // Variable to hold the new ingredient to be added
   const [newIngredient, setNewIngredient] = useState("");
+
+  // Variable to hold the error messages
   const [quantityError, setQuantityError] = useState("");
+
+  // Variable that holds the image file
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
@@ -40,6 +56,9 @@ const UpdatingUserCreatedCocktail = () => {
     fetchUserCreatedCocktailDetails();
   }, [usercocktailId]);
 
+  /**
+   * Handles the updating of the cocktail information
+   */
   const handleUpdateCocktail = async () => {
     try {
       const imageBase64 = await convertImageToBase64(imageFile);
@@ -73,11 +92,20 @@ const UpdatingUserCreatedCocktail = () => {
     }
   };
 
+  /**
+   * Handles the change in image file
+   * @param {Event} e
+   */
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     setImageFile(file);
   };
 
+  /**
+   * Converts an image file to base64 format
+   * @param {File} imageFile - The image file to be converted
+   * @returns {Promise<string|null>} A promise that resolves with the base64 data or null if no file is provided
+   */
   const convertImageToBase64 = (imageFile) => {
     return new Promise((resolve, reject) => {
       if (!imageFile) {
@@ -94,11 +122,18 @@ const UpdatingUserCreatedCocktail = () => {
     });
   };
 
+  /**
+   * Handles the event of updating a new ingredient
+   * @param {Event} e Oject representing the input change event
+   */
   const handleNewIngredientChange = (e) => {
     const ingredientText = e.target.value;
     setNewIngredient(ingredientText);
   };
 
+  /**
+   * Handles the adding of a new ingredient
+   */
   const addNewIngredient = () => {
     if (newIngredient.trim() !== "") {
       const [quantity] = newIngredient.split(" ");
@@ -120,6 +155,10 @@ const UpdatingUserCreatedCocktail = () => {
     }
   };
 
+  /**
+   * Handles the removal of a specified ingredient
+   * @param {Event} index Postion of ingredient to be removed
+   */
   const removeIngredient = (index) => {
     const updatedIngredients = [...ingredientLines];
     updatedIngredients.splice(index, 1);
