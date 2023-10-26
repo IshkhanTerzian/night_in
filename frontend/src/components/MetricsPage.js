@@ -3,6 +3,7 @@ import { Container, Button, Row, Col } from "react-bootstrap";
 import { barXAxisLabels } from "../data/data";
 import axios from "axios";
 
+import config from "../config.json";
 import BarGraph from "./BarGraph";
 import "../styles/MetricsPage.css"
 
@@ -51,9 +52,11 @@ function MetricsPage() {
    */
   const fetchTotalActiveUsers = () => {
     axios
-      .get("http://localhost:3001/totalActiveUsers")
+      .get(`${config.AWS_URL}/totalActiveUsers`)
       .then((response) => {
-        const creationDates = response.data.creationDates;
+
+        console.log("RESPONSE " + JSON.stringify(response));
+        const creationDates = response.data.data.creationDates;
 
         const monthsInOrder = barXAxisLabels;
 
