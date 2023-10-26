@@ -56,6 +56,8 @@ function MetricsPage() {
       .then((response) => {
 
         console.log("RESPONSE " + JSON.stringify(response));
+        console.log("RESPONSE2 " + JSON.stringify(response.data.data));
+
         const creationDates = response.data.data.creationDates;
 
         const monthsInOrder = barXAxisLabels;
