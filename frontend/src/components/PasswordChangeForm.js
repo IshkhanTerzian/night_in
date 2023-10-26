@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
 
+import config from "../config.json";
 import "../styles/PasswordChangeForm.css";
 
 const PasswordChangeForm = () => {
@@ -35,9 +36,9 @@ const PasswordChangeForm = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/password/${loggedInUserId}`)
+      .get(`${config.AWS_URL}/password/${loggedInUserId}`)
       .then((response) => {
-        setDbCurrentPassword(response.data);
+        setDbCurrentPassword(response.data.data);
       })
       .catch((error) => {
         console.error("Error fetching users password", error);
@@ -70,7 +71,7 @@ const PasswordChangeForm = () => {
 
     if (!currentPasswordError && !matchingPasswordsError) {
       axios
-        .post(`http://localhost:3001/updatepassword/${loggedInUserId}`, {
+        .post(`${config.AWS_URL}/updatepassword/${loggedInUserId}`, {
           newPassword: newPassword,
         })
         .then((response) => {
