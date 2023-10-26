@@ -19,9 +19,8 @@ function UpdateMainThreadPost() {
     axios
       .get(`${config.AWS_URL}/getSingleThreadPost/${threadID}`)
       .then((response) => {
-        console.log("FIRST" + JSON.stringify(response.data));
-        console.log("SECOND " + response.data.data[0]);
-        const data = response.data[0];
+        console.log("DATA " + JSON.stringify(response));
+        const data = response.data.data[0];
         setEditedContent(data.Content);
       })
       .catch((error) => {
