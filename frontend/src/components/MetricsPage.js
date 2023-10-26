@@ -96,7 +96,6 @@ function MetricsPage() {
     axios
       .get(`${config.AWS_URL}/mostBaseCocktailSearched`)
       .then((response) => {
-        console.log("RESPONSE" + JSON.stringify(response));
         const cocktailData = response.data.data;
 
         const baseCocktails = {};
@@ -152,7 +151,6 @@ function MetricsPage() {
     axios
       .get(`${config.AWS_URL}/mostUserSearchedCocktails`)
       .then((response) => {
-        console.log("RESPONSE" + JSON.stringify(response));
 
         const cocktailData = response.data.data;
 
@@ -209,7 +207,6 @@ function MetricsPage() {
     axios
       .get(`${config.AWS_URL}/mostCommentedThread`)
       .then((response) => {
-        console.log("RESPONSE" + JSON.stringify(response));
         
         const threadData = response.data.data;
 
