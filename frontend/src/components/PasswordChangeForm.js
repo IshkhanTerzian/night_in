@@ -39,8 +39,8 @@ const PasswordChangeForm = () => {
       .get(`${config.AWS_URL}/password/${loggedInUserId}`)
       .then((response) => {
         console.log("RESPONSE " + JSON.stringify(response));
-        console.log("PASSWORD " + response.data.data[0]);
-        setDbCurrentPassword(response.data.data[0]);
+        console.log("PASSWORD " + response.data.data[0].Password);
+        setDbCurrentPassword(response.data.data[0].Password);
       })
       .catch((error) => {
         console.error("Error fetching users password", error);
