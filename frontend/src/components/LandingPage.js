@@ -11,7 +11,6 @@ import Footer from "./Footer";
 import "../styles/LandingPage.css";
 
 function LandingPage() {
-
   const navigate = useNavigate();
 
   // Variable to check the user type
@@ -20,7 +19,7 @@ function LandingPage() {
   // Array to hold the cocktails being called from the DB
   const [cocktailData, setCocktailData] = useState([]);
 
-  // Variable that holds the banner image  
+  // Variable that holds the banner image
   const [imageFile, setImageFile] = useState(null);
 
   // Variable that holds the banner text

@@ -3,8 +3,13 @@ import { Card, Button, Col } from "react-bootstrap";
 
 import "../styles/CocktailCard.css";
 
-const CocktailCard = ({ imageSrc, onClick, cocktailName, buttonText, size, }) => {
-
+const CocktailCard = ({
+  imageSrc,
+  onClick,
+  cocktailName,
+  buttonText,
+  size,
+}) => {
   // Variable that holds the converted base64Image of the cocktail to be rendered
   const [base64ImageSrc, setBase64ImageSrc] = useState("");
 

@@ -50,9 +50,6 @@ function deleteBaseCocktail(req, res) {
   }
 }
 
-
-
-
 /**
  * Deleting a forum thread for the user cocktail created
  *
@@ -62,89 +59,125 @@ function deleteBaseCocktail(req, res) {
 function deletingForumOfUserCreatedCocktail(req, res) {
   const { usercocktailId } = req.params;
 
-  const sqlGetForumPostID = "SELECT ForumPostID FROM usercreatedcocktails WHERE UserCocktailID = ?";
+  const sqlGetForumPostID =
+    "SELECT ForumPostID FROM usercreatedcocktails WHERE UserCocktailID = ?";
 
-  conn.query(sqlGetForumPostID, [usercocktailId], function (err, resultForumPostID) {
-    if (err) {
-      console.error("Error fetching ForumPostID:", err);
-      res.status(500).json({ error: "Error fetching ForumPostID" });
-      return;
-    }
-
-    if (resultForumPostID.length === 0) {
-      console.error("User cocktail not found for ID:", usercocktailId);
-      res.status(404).json({ error: "User cocktail not found" });
-      return;
-    }
-
-    const forumPostID = resultForumPostID[0].ForumPostID;
-
-    const sql = "DELETE FROM addedforumpost WHERE ForumPostIDFK = ?";
-    const sql2 = "DELETE FROM forum WHERE CocktailIDPlaceholder = ?";
-    const values = "DELETE FROM usercreatedcocktails WHERE UserCocktailID = ?";
-
-    conn.beginTransaction(function (err) {
+  conn.query(
+    sqlGetForumPostID,
+    [usercocktailId],
+    function (err, resultForumPostID) {
       if (err) {
-        console.error("Error starting transaction:", err);
-        res.status(500).json({ error: "Error starting transaction" });
+        console.error("Error fetching ForumPostID:", err);
+        res.status(500).json({ error: "Error fetching ForumPostID" });
         return;
       }
 
-      conn.query(sql, [forumPostID], function (err, result1) {
+      if (resultForumPostID.length === 0) {
+        console.error("User cocktail not found for ID:", usercocktailId);
+        res.status(404).json({ error: "User cocktail not found" });
+        return;
+      }
+
+      const forumPostID = resultForumPostID[0].ForumPostID;
+
+      const sql = "DELETE FROM addedforumpost WHERE ForumPostIDFK = ?";
+      const sql2 = "DELETE FROM forum WHERE CocktailIDPlaceholder = ?";
+      const values =
+        "DELETE FROM usercreatedcocktails WHERE UserCocktailID = ?";
+
+      conn.beginTransaction(function (err) {
         if (err) {
-          console.error("Error deleting forum post record:", err);
-          return conn.rollback(function () {
-            res.status(500).json({ error: "Error deleting forum post record" });
-          });
+          console.error("Error starting transaction:", err);
+          res.status(500).json({ error: "Error starting transaction" });
+          return;
         }
 
-        console.log("Deleted forum post record with ForumPostID:", forumPostID);
-
-        conn.query(sql2, [usercocktailId], function (err, result2) {
+        conn.query(sql, [forumPostID], function (err, result1) {
           if (err) {
-            console.error("Error deleting forum record:", err);
+            console.error("Error deleting forum post record:", err);
             return conn.rollback(function () {
-              res.status(500).json({ error: "Error deleting forum record" });
+              res
+                .status(500)
+                .json({ error: "Error deleting forum post record" });
             });
           }
 
-          console.log("Deleted forum record for CocktailIDPlaceholder:", usercocktailId);
+          console.log(
+            "Deleted forum post record with ForumPostID:",
+            forumPostID
+          );
 
-          conn.query(values, [usercocktailId], function (err, result3) {
+          conn.query(sql2, [usercocktailId], function (err, result2) {
             if (err) {
-              console.error("Error deleting usercreatedcocktails record:", err);
+              console.error("Error deleting forum record:", err);
               return conn.rollback(function () {
-                res.status(500).json({ error: "Error deleting usercreatedcocktails record" });
+                res.status(500).json({ error: "Error deleting forum record" });
               });
             }
 
-            console.log("Deleted usercreatedcocktails record for UserCocktailID:", usercocktailId);
+            console.log(
+              "Deleted forum record for CocktailIDPlaceholder:",
+              usercocktailId
+            );
 
-            conn.commit(function (err) {
+            conn.query(values, [usercocktailId], function (err, result3) {
               if (err) {
-                console.error("Error committing transaction:", err);
+                console.error(
+                  "Error deleting usercreatedcocktails record:",
+                  err
+                );
                 return conn.rollback(function () {
-                  res.status(500).json({ error: "Error committing transaction" });
+                  res
+                    .status(500)
+                    .json({
+                      error: "Error deleting usercreatedcocktails record",
+                    });
                 });
               }
 
-              if (
-                result1.affectedRows === 0 &&
-                result2.affectedRows === 0 &&
-                result3.affectedRows === 0
-              ) {
-                console.error("Cocktail not found for deletion with ID:", usercocktailId);
-                res.status(404).json({ error: "Cocktail not found for deletion" });
-              } else {
-                console.log("Cocktail deleted successfully with ID:", usercocktailId);
-                res.status(200).json({ message: "Cocktail deleted successfully" });
-              }
+              console.log(
+                "Deleted usercreatedcocktails record for UserCocktailID:",
+                usercocktailId
+              );
+
+              conn.commit(function (err) {
+                if (err) {
+                  console.error("Error committing transaction:", err);
+                  return conn.rollback(function () {
+                    res
+                      .status(500)
+                      .json({ error: "Error committing transaction" });
+                  });
+                }
+
+                if (
+                  result1.affectedRows === 0 &&
+                  result2.affectedRows === 0 &&
+                  result3.affectedRows === 0
+                ) {
+                  console.error(
+                    "Cocktail not found for deletion with ID:",
+                    usercocktailId
+                  );
+                  res
+                    .status(404)
+                    .json({ error: "Cocktail not found for deletion" });
+                } else {
+                  console.log(
+                    "Cocktail deleted successfully with ID:",
+                    usercocktailId
+                  );
+                  res
+                    .status(200)
+                    .json({ message: "Cocktail deleted successfully" });
+                }
+              });
             });
           });
         });
       });
-    });
-  });
+    }
+  );
 }
 
 /**

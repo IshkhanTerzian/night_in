@@ -1,21 +1,19 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Container, Button } from 'react-bootstrap';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Container, Button } from "react-bootstrap";
 
-import Footer from './Footer';
+import Footer from "./Footer";
 import "../styles/SuccessfulRegistration.css";
 
 const Logout = () => {
-
   const navigate = useNavigate();
 
   /**
    * Handles the navigation to send the user to the logout screen
    */
   const handleGoToLogin = () => {
-    navigate('/');
+    navigate("/");
   };
-
 
   return (
     <div className="d-flex flex-column vh-100">
@@ -32,6 +30,6 @@ const Logout = () => {
       <Footer className="sticky-footer" />
     </div>
   );
-}
+};
 
 export default Logout;

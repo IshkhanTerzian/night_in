@@ -5,7 +5,7 @@ import axios from "axios";
 
 import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
-import "../styles/UpdatingUserCreatedCocktail.css"; 
+import "../styles/UpdatingUserCreatedCocktail.css";
 
 const UpdatingUserCreatedCocktail = () => {
   const navigate = useNavigate();
@@ -24,7 +24,6 @@ const UpdatingUserCreatedCocktail = () => {
         const response = await axios.get(
           `${config.AWS_URL}/usercreatedcocktaildetailpage/${usercocktailId}`
         );
-        console.log("RESPONSE" + response.data.data);
         const data = response.data.data;
         const parsedIngredients = JSON.parse(data.Ingredients);
         setIngredientLines(parsedIngredients);
@@ -150,7 +149,7 @@ const UpdatingUserCreatedCocktail = () => {
                   />
                   <Button
                     variant="link"
-                    className="file-input-button" 
+                    className="file-input-button"
                     as="label"
                     htmlFor="formFile"
                   >
@@ -181,7 +180,6 @@ const UpdatingUserCreatedCocktail = () => {
                     placeholder="Edit cocktail description"
                     value={editedDescription}
                     onChange={(e) => setEditedDescription(e.target.value)}
-                    
                   />
                 </Form.Group>
               </Col>

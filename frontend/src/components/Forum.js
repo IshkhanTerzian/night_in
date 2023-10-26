@@ -27,7 +27,9 @@ function Forum() {
     axios
       .get(`${config.AWS_URL}/forum`)
       .then((response) => {
-        const sortedForumPosts = sortForumPostsByCreationDate(response.data.data);
+        const sortedForumPosts = sortForumPostsByCreationDate(
+          response.data.data
+        );
         setForumPosts(sortedForumPosts);
       })
       .catch((error) => {

@@ -7,7 +7,6 @@ import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
 
 function UpdateMainThreadPost() {
-
   const navigate = useNavigate();
 
   // Variable to hold the forumPostID from the URL
@@ -18,7 +17,7 @@ function UpdateMainThreadPost() {
 
   // Variable that holds the edited title of the thread
   const [editedTopicTitle, setEditedTopicTitle] = useState("");
-  
+
   // Variable that holds the edited content of the thread
   const [editedContent, setEditedContent] = useState("");
 
@@ -48,8 +47,6 @@ function UpdateMainThreadPost() {
         Content: editedContent,
       })
       .then((response) => {
-        console.log("Content updated successfully:", response.data.data);
-
         navigate(`/forumpostcontentpage/${forumpostId}`);
       })
       .catch((error) => {

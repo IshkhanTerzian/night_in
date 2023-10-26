@@ -102,7 +102,7 @@ const UserCocktailCreationPage = () => {
         Instructions: instructions,
         CocktailImage: imageBase64,
       };
-      
+
       const response = await axios.post(
         `${config.AWS_URL}/usercreatingcocktail/${userId}`,
         requestData,
@@ -114,7 +114,6 @@ const UserCocktailCreationPage = () => {
       );
 
       navigate("/recipes");
-
     } catch (error) {
       console.error("Error sending data:", error);
     }

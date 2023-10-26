@@ -33,7 +33,7 @@ const UserCreatedCocktailDetailPage = () => {
         const response = await axios.get(
           `${config.AWS_URL}/usercreatedcocktaildetailpage/${usercocktailId}`
         );
-        setCocktailInfo(response.data.data);  
+        setCocktailInfo(response.data.data);
         setLikes(response.data.data.TotalLikes);
         setDislikes(response.data.data.TotalDislikes);
         const parsedIngredients = JSON.parse(response.data.data.Ingredients);
@@ -126,7 +126,6 @@ const UserCreatedCocktailDetailPage = () => {
       );
 
       if (response.status === 200) {
-        console.log("Cocktail deleted successfully");
         navigate("/recipes");
       }
     } catch (error) {
@@ -209,8 +208,7 @@ const UserCreatedCocktailDetailPage = () => {
         dislikes: updatedDislikes,
         usercocktailId,
       })
-      .then((response) => {
-      })
+      .then((response) => {})
       .catch((error) => {
         console.error("Error updating the database:", error);
       });

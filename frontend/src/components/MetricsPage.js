@@ -5,7 +5,7 @@ import axios from "axios";
 
 import config from "../config.json";
 import BarGraph from "./BarGraph";
-import "../styles/MetricsPage.css"
+import "../styles/MetricsPage.css";
 
 function MetricsPage() {
   // An array to hold the data needed to be used by the BarGraph
@@ -54,7 +54,6 @@ function MetricsPage() {
     axios
       .get(`${config.AWS_URL}/totalActiveUsers`)
       .then((response) => {
-
         const creationDates = response.data.data.creationDates;
 
         const monthsInOrder = barXAxisLabels;
@@ -151,7 +150,6 @@ function MetricsPage() {
     axios
       .get(`${config.AWS_URL}/mostUserSearchedCocktails`)
       .then((response) => {
-
         const cocktailData = response.data.data;
 
         const useCocktails = {};
@@ -207,7 +205,6 @@ function MetricsPage() {
     axios
       .get(`${config.AWS_URL}/mostCommentedThread`)
       .then((response) => {
-        
         const threadData = response.data.data;
 
         const threads = {};

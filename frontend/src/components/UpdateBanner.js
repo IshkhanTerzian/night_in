@@ -46,7 +46,6 @@ function UpdateBanner() {
         console.error("Error sending data:", error);
       }
     } else {
-      console.log("No image selected.");
     }
   };
 

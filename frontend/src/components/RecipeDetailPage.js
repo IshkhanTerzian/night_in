@@ -38,7 +38,7 @@ const RecipeDetailPage = () => {
   // Variable to hold the error messages
   const [customQuantityError, setCustomQuantityError] = useState("");
 
-  // Varialbe that holds the counting increment of this specific cocktail, to be used in Metrics
+  // Variable that holds the counting increment of this specific cocktail, to be used in Metrics
   const [incrementedSearchedCounter, setIncrementedSearchedCounter] =
     useState(null);
 
@@ -172,7 +172,6 @@ const RecipeDetailPage = () => {
     navigate(`/updatingBaseCocktail/${cocktailId}`);
   };
 
-  
   return (
     <>
       <NavbarComponent />

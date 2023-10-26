@@ -22,7 +22,6 @@ const Register = () => {
    */
   const handleRegister = async (e) => {
     e.preventDefault();
-  
 
     try {
       await axios.post(
@@ -34,7 +33,7 @@ const Register = () => {
         },
         {
           headers: {
-            'Content-Type': 'application/json', 
+            "Content-Type": "application/json",
           },
         }
       );

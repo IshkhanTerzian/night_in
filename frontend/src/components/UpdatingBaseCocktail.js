@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
+import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
 import "../styles/UpdatingBaseCocktail.css";
 
@@ -35,9 +36,9 @@ const UpdatingBaseCocktail = () => {
     const fetchCocktailDetail = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/recipedetailpage/${cocktailId}`
+          `${config.AWS_URL}/recipedetailpage/${cocktailId}`
         );
-        const data = response.data;
+        const data = response.data.data;
         setIngredientLines(data.Ingredients);
         setEditedCocktailName(data.CocktailName);
         setEditedDescription(data.Description);
@@ -69,7 +70,7 @@ const UpdatingBaseCocktail = () => {
       };
 
       const response = await axios.post(
-        `http://localhost:3001/updateCocktail/${cocktailId}`,
+        `${config.AWS_URL}/updateCocktail/${cocktailId}`,
         updatedCocktailData,
         {
           headers: {
@@ -77,7 +78,6 @@ const UpdatingBaseCocktail = () => {
           },
         }
       );
-
 
       navigate(`/recipedetailpage/${cocktailId}`);
     } catch (error) {

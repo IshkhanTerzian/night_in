@@ -6,10 +6,9 @@ import axios from "axios";
 
 import config from "../config.json";
 import NavbarComponent from "./NavbarComponent";
-import "../styles/ForumPostContentPage.css"; 
+import "../styles/ForumPostContentPage.css";
 
 function ForumPostContentPage() {
-
   const navigate = useNavigate();
 
   // Variable that holds the loged in UserId and UserType
@@ -63,20 +62,17 @@ function ForumPostContentPage() {
   };
 
   /**
-   * Handles the event of submition of the new comment to be added 
+   * Handles the event of submition of the new comment to be added
    * to the backend
    */
   const handleSubmitClick = () => {
     if (commentText.trim() !== "") {
       axios
-        .post(
-          `${config.AWS_URL}/addnewpost`,
-          {
-            userId: loggedInUserId,
-            forumpostId: forumpostId,
-            content: commentText,
-          }
-        )
+        .post(`${config.AWS_URL}/addnewpost`, {
+          userId: loggedInUserId,
+          forumpostId: forumpostId,
+          content: commentText,
+        })
         .then((response) => {
           setCommentText("");
           setCommentVisible(false);
@@ -111,7 +107,7 @@ function ForumPostContentPage() {
 
   /**
    * Handles the update of a sub-comment post in a forum by an authenticated user
-   * @param {number} threadID 
+   * @param {number} threadID
    */
   const handleUpdateThread = (threadID) => {
     navigate(`/updatethreadpost/${threadID}`);

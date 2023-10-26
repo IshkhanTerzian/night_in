@@ -101,7 +101,6 @@ const AdminCocktailCreation = () => {
       );
 
       navigate("/recipes");
-
     } catch (error) {
       console.error("Error sending data:", error);
     }
