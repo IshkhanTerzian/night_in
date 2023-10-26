@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useAuth } from "./AuthContext";
+
+import config from "../config.json";
 import axios from "axios";
 
 function UserDetailPage() {
@@ -13,9 +15,9 @@ function UserDetailPage() {
   useEffect(() => {
     if (loggedInUserId) {
       axios
-        .get(`http://localhost:3001/userinfo/${loggedInUserId}`)
+        .get(`${config.AWS_URL}/userinfo/${loggedInUserId}`)
         .then((response) => {
-          setUserData(response.data[0]);
+          setUserData(response.data.data[0]);
         })
         .catch((error) => {
           console.error("Error fetching user's information", error);
