@@ -55,9 +55,6 @@ function MetricsPage() {
       .get(`${config.AWS_URL}/totalActiveUsers`)
       .then((response) => {
 
-        console.log("RESPONSE " + JSON.stringify(response));
-        console.log("RESPONSE2 " + JSON.stringify(response.data.data));
-
         const creationDates = response.data.data.creationDates;
 
         const monthsInOrder = barXAxisLabels;
@@ -97,9 +94,10 @@ function MetricsPage() {
    */
   const mostBaseCocktailSearched = () => {
     axios
-      .get("http://localhost:3001/mostBaseCocktailSearched")
+      .get(`${config.AWS_URL}/mostBaseCocktailSearched`)
       .then((response) => {
-        const cocktailData = response.data;
+        console.log("RESPONSE" + JSON.stringify(response));
+        const cocktailData = response.data.data;
 
         const baseCocktails = {};
 
@@ -152,9 +150,11 @@ function MetricsPage() {
    */
   const mostUserCocktailSearched = () => {
     axios
-      .get("http://localhost:3001/mostUserSearchedCocktails")
+      .get(`${config.AWS_URL}/mostUserSearchedCocktails`)
       .then((response) => {
-        const cocktailData = response.data;
+        console.log("RESPONSE" + JSON.stringify(response));
+
+        const cocktailData = response.data.data;
 
         const useCocktails = {};
 
@@ -207,9 +207,11 @@ function MetricsPage() {
    */
   const mostCommentedThread = () => {
     axios
-      .get("http://localhost:3001/mostCommentedThread")
+      .get(`${config.AWS_URL}/mostCommentedThread`)
       .then((response) => {
-        const threadData = response.data;
+        console.log("RESPONSE" + JSON.stringify(response));
+        
+        const threadData = response.data.data;
 
         const threads = {};
 
