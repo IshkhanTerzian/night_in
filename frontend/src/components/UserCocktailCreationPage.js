@@ -34,7 +34,9 @@ const UserCocktailCreationPage = () => {
   // Variable that holds the error message
   const [quantityError, setQuantityError] = useState("");
 
-  const [baseImage, setBaseImage] = useState('https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fcocktail&psig=AOvVaw0161pESjMKNLH-Gy03fNAA&ust=1698684933776000&source=images&cd=vfe&ved=0CBIQjRxqFwoTCKDiqZXdm4IDFQAAAAAdAAAAABAE');
+  const [baseImage, setBaseImage] = useState(
+    "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fcocktail&psig=AOvVaw0161pESjMKNLH-Gy03fNAA&ust=1698684933776000&source=images&cd=vfe&ved=0CBIQjRxqFwoTCKDiqZXdm4IDFQAAAAAdAAAAABAE"
+  );
 
   /**
    * Handles the change event when a file input for an image is selected
@@ -133,7 +135,7 @@ const UserCocktailCreationPage = () => {
   const convertImageToBase64 = (imageFile) => {
     return new Promise((resolve, reject) => {
       if (!imageFile) {
-        resolve(null);
+        resolve(baseImage); 
       } else {
         const reader = new FileReader();
         reader.onloadend = () => {
