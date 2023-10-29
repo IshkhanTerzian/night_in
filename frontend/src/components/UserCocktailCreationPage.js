@@ -4,7 +4,6 @@ import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
 import config from "../config.json";
-import baseImage from "../assets/basecocktail.png";
 import NavbarComponent from "./NavbarComponent";
 import "../styles/UserCocktailCreationPage.css";
 
@@ -35,13 +34,19 @@ const UserCocktailCreationPage = () => {
   // Variable that holds the error message
   const [quantityError, setQuantityError] = useState("");
 
+  const [baseImage, setBaseImage] = useState('https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fcocktail&psig=AOvVaw0161pESjMKNLH-Gy03fNAA&ust=1698684933776000&source=images&cd=vfe&ved=0CBIQjRxqFwoTCKDiqZXdm4IDFQAAAAAdAAAAABAE');
+
   /**
    * Handles the change event when a file input for an image is selected
    * @param {Event} e - Object representing the file input change
    */
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
-    setImageFile(file);
+    if (file) {
+      setImageFile(file);
+    } else {
+      setImageFile(baseImage);
+    }
   };
 
   /**
@@ -93,14 +98,7 @@ const UserCocktailCreationPage = () => {
    */
   const handleSubmit = async () => {
     try {
-      let imageBase64;
-
-      if (!imageFile) {
-        // If imageFile is empty, use the baseImage
-        imageBase64 = await convertImageToBase64(baseImage);
-      } else {
-        imageBase64 = await convertImageToBase64(imageFile);
-      }
+      let imageBase64 = await convertImageToBase64(imageFile);
 
       const requestData = {
         userId,
