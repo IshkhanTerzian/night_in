@@ -4,6 +4,7 @@ import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
 import config from "../config.json";
+import baseImage from "../assets/basecocktail.png"
 import NavbarComponent from "./NavbarComponent";
 import "../styles/UserCocktailCreationPage.css";
 
@@ -91,6 +92,11 @@ const UserCocktailCreationPage = () => {
    * Handles the form submission by sending data to the backend
    */
   const handleSubmit = async () => {
+
+    if (!imageFile) {
+      setImageFile(baseImage);
+    }
+    
     try {
       const imageBase64 = await convertImageToBase64(imageFile);
 
